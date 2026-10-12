@@ -1,0 +1,148 @@
+%% ============================================================
+%% APPENDICES
+%% ============================================================
+\appendix
+
+\chapter{Python Model Code}
+\label{app:code}
+
+All models are contained in the Python package \texttt{co2whr} and four run
+scripts, supplied with this thesis. Running \texttt{python run\_all.py} from
+the \texttt{code/} directory regenerates every figure in \texttt{figures/}
+and writes every number used in this thesis to
+\texttt{results/results.json} and \texttt{results/summary.txt} (about two
+minutes on a laptop). Python\,3.9+, CoolProp\,6.x (HEOS backend), NumPy and
+Matplotlib are required.
+
+\begin{description}[leftmargin=2em,itemsep=3pt]
+\item[\texttt{co2whr/cycles.py}] Steady-state state-point models for the
+SRC, sCO$_2$ Brayton and tCO$_2$ Rankine cycles with a recuperator limited
+by both streams (Eq.~\ref{eq:recup}); flow exergy and component exergy
+balance.
+\item[\texttt{co2whr/heatex.py}] Counter-flow heater integration with a
+duty-linear gas profile, bisection for the gas outlet temperature at a
+10\,K approach, segmented $UA$ (Eq.~\ref{eq:seg_UA}) and two-point LMTD;
+recuperator $UA$ with real properties on both sides; cooler $UA$.
+\item[\texttt{co2whr/design.py}] Site design points: pinch-limited steam
+pressure by golden-section search on $w_{gas}$, recovered power from each
+stream, LMTD-versus-segmented comparison.
+\item[\texttt{co2whr/costs.py}] Cost correlations of Table~\ref{tab:cost_basis},
+CEPCI escalation, currency conversion and total erected cost by component.
+\item[\texttt{co2whr/economics.py}] LCOE, NPV, discounted and simple payback,
+IRR, Monte Carlo sampling and heat-exchanger breakeven.
+\item[\texttt{co2whr/offdesign.py}] Stodola part-load correction with
+sliding-pressure control; Marchionni flexibility scoring.
+\item[\texttt{co2whr/sites.py}] The three case-study definitions and shared
+constants.
+\item[\texttt{run\_rq1.py} -- \texttt{run\_rq4.py}, \texttt{run\_all.py}]
+One script per research question producing the figures and result tables;
+\texttt{run\_all.py} runs all four and writes the results files.
+\end{description}
+
+Validation outcomes: SRC model versus NIST Webbook, maximum deviation
+0.031\,\% on specific enthalpy; CO$_2$ critical point versus NIST REFPROP,
+0.04\,\%; global exergy balance closure below $10^{-12}$\,kJ/kg for all
+three cycles; recuperator internal temperature difference positive at every
+node for every reported case. The Interim Report model files
+(\texttt{tco2\_model.py}, \texttt{sco2\_model.py}, \texttt{src\_model.py},
+\texttt{rq2\_sizing.py}, \texttt{rq2\_cost.py}, \texttt{rq3\_economics.py},
+\texttt{rq4\_offdesign.py}) are retained in the repository under
+\texttt{code/interim\_original/} for comparison; their known errors are
+listed in Table~\ref{tab:revisions}.
+
+\chapter{Complete Findings Log}
+\label{app:findings}
+
+All thirty findings are listed below with their section reference and key
+numerical value.
+
+\begin{longtable}{>{\raggedright\arraybackslash}p{1.0cm}
+  >{\raggedright\arraybackslash}p{5.2cm}
+  >{\raggedright\arraybackslash}p{8.0cm}}
+\toprule
+\rowcolor{tableheader}
+\textbf{No.} & \textbf{Finding} & \textbf{Key value} \\
+\midrule
+\endfirsthead
+\toprule
+\rowcolor{tableheader}
+\textbf{No.} & \textbf{Finding} & \textbf{Key value} \\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+\multicolumn{3}{l}{\textit{RQ1 --- Thermodynamic performance (Chapter~\ref{ch:results_rq1})}} \\
+F1  & SRC most efficient at every TIT, 150--600\,\textdegree C & SRC 19.1--35.4\,\%; tCO$_2$ 13.3--30.1\,\%; sCO$_2$ 5.3--30.1\,\%; no crossover \\
+F2  & sCO$_2$ BWR prohibitive below 300\,\textdegree C & 79.8\,\% at 150\,\textdegree C; 45\,\% at 300\,\textdegree C; 26.9\,\% at 600\,\textdegree C \\
+F3  & Recuperator gain bounded by the hot stream & +3.4/+7.0/+10.1 pp at $\varepsilon=0.70$ (interim: +12.3/+16.8/+20.3) \\
+F4  & Steam boiler largest single loss; steam still most exergy-efficient per unit work at 400\,\textdegree C & 375\,kJ/kg (56.6\,\%); 0.70 vs 1.09 (tCO$_2$) vs 1.25 (sCO$_2$) kJ/kJ \\
+F5  & Recuperator the dominant CO$_2$ irreversibility & 28\,\% (sCO$_2$) and 32\,\% (tCO$_2$) of destruction at 400\,\textdegree C \\
+F6  & tCO$_2$ heater pinched at both terminals, bulge mid-exchanger & $\Delta T_{max}$ 41.6/49.0/64.7\,K at 88/145/166\,\textdegree C \\
+F7  & Heater inlet sets the floor on recovery; recuperation raises it & Gas out 34--42\,\textdegree C ($\varepsilon=0$) vs 60/101/151\,\textdegree C ($\varepsilon=0.70$) \\
+F8  & Pseudo-critical peak sharpens as pressure falls & 4.42\,kJ/kg$\cdot$K at 57\,\textdegree C (12.8\,MPa); 2.62 at 76\,\textdegree C (20\,MPa) \\
+F9  & Recuperation adds more to efficiency than to recovered work & $\varepsilon$ 0$\to$0.85: $\eta$ +4.5/+9.3/+13.9 pp; $w_{gas}$ +12/+16/+21\,\% \\
+F10 & High $\varepsilon$: recuperator approaches heater duty and the approach limit & 302 vs 399\,kJ/kg at CS3; $\Delta T_{min}$ 9.8\,K at CS2 \\
+F11 & Low condensing pressures climatically infeasible & 3.5/4.0/5.0\,MPa condense at 0.2/5.3/14.3\,\textdegree C \\
+F12 & Chiller for a 14\,\textdegree C sink would consume most or all of the output & 134/75/63\,\% of net work at COP 4 \\
+F13 & Warm sink penalty on sCO$_2$ concentrated at low TIT & 32$\to$40\,\textdegree C inlet: 15.7$\to$9.2\,\% at 200\,\textdegree C \\
+\midrule
+\multicolumn{3}{l}{\textit{RQ2 --- Sizing and capital cost (Chapter~\ref{ch:results_rq2})}} \\
+F14 & Integrated steam pressure far below the sweep value & 0.16/0.91/3.69\,MPa; site $\eta$ 14.4/23.7/30.8\,\% \\
+F15 & tCO$_2$ recovers the most power at 200 and 350\,\textdegree C; sCO$_2$ the least everywhere & 723/3418/2186\,kW vs SRC 412/2639/2273 vs sCO$_2$ 340/1988/1280 \\
+F16 & CO$_2$ turbines 15--26$\times$ more compact & SP 0.63--0.81 (SRC) vs 0.031--0.042 (CO$_2$) \\
+F17 & Steam needs multi-stage turbines above 350\,\textdegree C; CO$_2$ single-stage & VFR 10.5/45/148 (SRC) vs 2.0--3.1 (CO$_2$) \\
+F18 & Two-point LMTD overestimates tCO$_2$ heater area & +129/+171/+223\,\% at $\varepsilon=0$ \\
+F19 & Steam cheapest per kW at every site & 4{,}444/3{,}071/2{,}598 AUD/kW at 1\,MWe; tCO$_2$ +30--65\,\%; sCO$_2$ 2.3--2.6$\times$ \\
+F20 & sCO$_2$ penalty is turbomachinery & 2.8\,MW turbine + 1.8\,MW compressor per MWe at CS2; 37\,\% of equipment \\
+F21 & Heat exchangers 35--43\,\% of CO$_2$ equipment; heat rejection 17--44\,\% for all & Cooler largest for 14\,\%-efficient steam at CS2 \\
+\midrule
+\multicolumn{3}{l}{\textit{RQ3 --- Techno-economics (Chapter~\ref{ch:results_rq3})}} \\
+F22 & Steam lowest LCOE at every site & 96/35/31 AUD/MWh; tCO$_2$ 100/53/57; sCO$_2$ 243/94/91 \\
+F23 & tCO$_2$ best NPV at 200\,\textdegree C; steam at 350 and 500\,\textdegree C & CS2: 1.71 vs 1.12\,M; CS1: 11.4 vs 10.1\,M; CS3: 12.4 vs 7.5\,M \\
+F24 & Discounted payback 3--4\,yr steam, 7\,yr tCO$_2$ at hot sites; 10--11\,yr at CS2 & IRR 28/36\,\% (SRC), 17/18\,\% (tCO$_2$), 12\,\% at CS2 \\
+F25 & Economics follow efficiency $\times$ recovery depth & sCO$_2$ at CS1: $-1.4$ pp but $-25$\,\% power; tCO$_2$ at CS2: +1.2 pp but +75\,\% power \\
+F26 & Steam robust at 350/500\,\textdegree C; CS2 a one-in-three risk & $P(\mathrm{NPV}>0)$ 99.8/100\,\% (SRC), 90/91\,\% (tCO$_2$), 72/68\,\% at CS2 \\
+F27 & Cheaper HX rescues tCO$_2$ only at 200\,\textdegree C & 11\,\% cut at CS2; 95\,\% at CS1; unreachable at CS3 and for sCO$_2$ \\
+\midrule
+\multicolumn{3}{l}{\textit{RQ4 --- Off-design (Chapter~\ref{ch:results_rq4})}} \\
+F28 & tCO$_2$ retains most efficiency at deep part load; sCO$_2$ least & 56--67\,\% vs 38--66\,\% (SRC) vs 41--47\,\% (sCO$_2$) at 20\,\% load \\
+F29 & Steam part-load behaviour depends on design pressure & 66\,\% retention at CS3 (3.7\,MPa) vs 38\,\% at CS2 (0.16\,MPa) \\
+F30 & sCO$_2$ 80\,\%-load gain at CS2 is a pressure-ratio effect & Retention 1.006; disappears at 350/500\,\textdegree C \\
+\end{longtable}
+
+\chapter{AI Assistance Log}
+\label{app:ai}
+
+%% STUDENT: this log must match your own records. Add, remove or reword
+%% entries so that it is complete and accurate before submission.
+This log records the use of generative AI tools in this thesis, as required
+by UQ policy~\cite{UQ2026AI}. Each entry states the section affected, the
+tool, what was requested, what was received and how it was used.
+
+\begin{longtable}{>{\raggedright\arraybackslash}p{2.2cm}
+  >{\raggedright\arraybackslash}p{1.6cm}
+  >{\raggedright\arraybackslash}p{4.3cm}
+  >{\raggedright\arraybackslash}p{6.0cm}}
+\toprule
+\rowcolor{tableheader}
+\textbf{Section} & \textbf{Tool} & \textbf{Request} & \textbf{Output and use} \\
+\midrule
+\endfirsthead
+\toprule
+\rowcolor{tableheader}
+\textbf{Section} & \textbf{Tool} & \textbf{Request} & \textbf{Output and use} \\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+Ch.~1--2 & Claude & Draft background and literature-review paragraphs from my reading notes and reference list & Draft prose; checked against the primary sources, reorganised and rewritten where needed \\
+Ch.~1--3 & Claude & \LaTeX{} formatting of definitions, equations, tables and the methodology flow diagram & Typesetting only; content from my proposal and interim report \\
+Model code (interim) & Copilot & Autocomplete while writing \texttt{tco2\_model.py} and the other interim scripts & CoolProp/NumPy/Matplotlib syntax completions; all model logic written by me \\
+Model code (final) & Claude & Review my seven interim Python files and their printed outputs & Identified: recuperator limited by the cold stream only (second-law violation); gas profile linear in node index in the pinch diagrams; cancelling temperature-difference expression for the sCO$_2$ heater and ad hoc boiler $\Delta T$ in \texttt{rq2\_cost.py}; condenser cost defined but unused; turbine coefficients not traceable to the cited paper; simple payback; Monte Carlo not varying source temperature as claimed \\
+Model code (final) & Claude & Restructure the scripts into one package implementing the corrections, a consistent heater integration, the cost basis of Table~\ref{tab:cost_basis}, fixed-source economics, discounted payback and breakeven & \texttt{co2whr} package and run scripts (Appendix~\ref{app:code}). I ran the package, checked balance closures, verified every correlation against Weiland et al.~(2019), Turton et al.~(2012) and DOE (2012), and compared outputs with my interim results \\
+Sec.~\ref{sec:method_cost} & Claude & Locate and verify the Weiland et al.~(2019) correlation coefficients & Coefficients and validity ranges from the NETL/DOE source; used in Table~\ref{tab:cost_basis} after my own check of the paper \\
+Figures & Claude & Matplotlib scripts for all figures from the model outputs & Figures regenerated by \texttt{run\_all.py}; captions written with the chapter text \\
+Ch.~4--9 & Claude & Draft the results, discussion and conclusion chapters from \texttt{results/summary.txt} and my notes on interpretation & Draft text with finding boxes; I checked every number against the results file, revised the interpretation and approved the final wording \\
+Abstract, Exec.\ Summary, Declaration & Claude & Draft from the final chapters & Revised and approved by me \\
+Conference slides & Claude & Build and revise the presentation from the thesis content and supervisor feedback & Slides and speaker notes; presented by me on 8~October~2026 \\
+\end{longtable}

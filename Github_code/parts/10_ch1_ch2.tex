@@ -1,0 +1,465 @@
+%% ============================================================
+%% CHAPTER 1 — INTRODUCTION
+%% ============================================================
+\chapter{Introduction}
+\label{ch:introduction}
+
+\section{Background and Context}
+\label{sec:background}
+
+Somewhere between 20 and 50\,\% of the fuel burned in industrial facilities
+never does useful work. It departs the process as hot exhaust gas, cooling
+water, or radiated heat and is rejected to the
+atmosphere~\cite{Johnson2008,Papapetrou2018}. Across manufacturing and
+processing in aggregate --- cement kilns operating above 900\,\textdegree C,
+electric arc steel furnaces, gas compression trains, refinery distillation
+columns --- these losses are large enough that converting even a modest
+fraction into electricity would materially reduce both operating costs and
+carbon dioxide emissions without requiring new primary energy
+infrastructure~\cite{Bonilla2015}.
+
+Australia has particular reason to take industrial waste heat seriously. Cement
+manufacture, liquefied natural gas (LNG) processing, and electric arc furnace
+steelmaking rank among the country's most energy-intensive industries, all
+operating at temperatures at which power cycle generation is thermodynamically
+viable. The Australian Renewable Energy Agency's industrial transformation
+programme identified waste heat recovery as one of the most cost-competitive
+near-term decarbonisation options available to heavy
+industry~\cite{ARENA2023}. The complication is that the majority of published
+engineering analysis of WHR power cycles was conducted in the United States
+or Europe, with economic boundary conditions --- electricity prices, ambient
+temperatures, labour rates, and equipment supply chains --- that do not
+translate directly to Australian conditions. This creates a gap, and the
+present thesis is designed to partially close it.
+
+Three power cycle technologies compete for this application. The \textit{Steam
+Rankine Cycle} (SRC) is the mature baseline. Subcritical SRC plants typically
+convert 33--38\,\% of heat input to electricity, with supercritical steam
+pushing that toward 45--48\,\% at high turbine inlet
+temperatures~\cite{Tian2022}. Below approximately 300\,\textdegree C,
+efficiency declines steeply as the saturation pressure falls~\cite{Tchanche2011},
+which is the thermodynamic opening for CO$_2$-based cycles.
+
+Both CO$_2$ variants exploit the low critical point of carbon dioxide:
+31.1\,\textdegree C and 7.38\,MPa. The \textit{Supercritical CO$_2$ (sCO$_2$)
+Brayton cycle} maintains CO$_2$ above both values throughout the entire loop,
+eliminating phase change entirely and enabling compact turbomachinery. The
+cost is that compressing a gas always requires more work than pumping a
+liquid; at lower source temperatures, the compressor consumes a prohibitive
+share of turbine output. The \textit{Transcritical CO$_2$ (tCO$_2$) Rankine
+cycle} handles this by condensing CO$_2$ to a liquid on the low-pressure side
+and pumping it above the critical pressure, reducing back-work ratio
+significantly. The operational constraint is that condensation requires a heat sink below 31.1\,\textdegree C, which is not always achievable in warmer Australian locations~\cite{Jiang2023,Lee2023}.
+
+This thesis compares all three cycles simultaneously under consistent
+Australian-specific assumptions, a combination not previously addressed in the
+published literature. The outcome is a practical cycle selection framework for
+Australian industrial operators considering WHR investment.
+
+\section{Definitions}
+\label{sec:definitions}
+
+The following terms are defined here for unambiguous use throughout.
+
+\begin{description}[leftmargin=2em,style=nextline]\sloppy
+
+\item[\textbf{Rankine Cycle (RC):}]
+A closed thermodynamic cycle in which the working fluid is pumped as a
+liquid (1$\to$2), heated and evaporated at constant pressure (2$\to$3),
+expanded through a turbine (3$\to$4), and condensed back to liquid
+(4$\to$1). The SRC uses water operating subcritically~\cite{Moran2018}.
+
+\item[\textbf{Supercritical CO$_2$ (sCO$_2$) Brayton Cycle:}]
+A closed power cycle in which CO$_2$ remains above its critical pressure
+(7.38\,MPa) and temperature (31.1\,\textdegree C) throughout. No phase
+change occurs. Near-critical CO$_2$ is substantially less compressible than
+an ideal gas, reducing compressor work relative to a conventional gas
+turbine, but back-work ratio remains higher than for liquid-pump
+cycles~\cite{Dostal2004,Crespi2017}.
+
+\item[\textbf{Transcritical CO$_2$ (tCO$_2$) Rankine Cycle:}]
+A cycle that crosses the CO$_2$ saturation boundary. CO$_2$ condenses to a
+subcritical liquid on the low-pressure side, is pumped above critical
+pressure, heated supercritically, and expanded. Liquid-phase compression
+keeps pump work low (back-work ratio 12--23\,\% across the modelled range).
+The requirement for a heat sink below 31.1\,\textdegree C is the main
+operational constraint~\cite{Jiang2023,Lee2023}.
+
+\item[\textbf{Pseudo-Critical Temperature ($T_{pc}$):}]
+The temperature at which the isobaric specific heat $c_p$ reaches its local
+maximum at a given supercritical pressure. CO$_2$ undergoes no phase
+transition above $P_c$, but $c_p$ peaks sharply in a narrow band near the
+saturation line extension, creating anomalously high heat capacity. At
+12.8\,MPa, $T_{pc} \approx 57$\,\textdegree C with peak $c_p =
+4.4$\,kJ/(kg$\cdot$K); at 20\,MPa, $T_{pc} \approx 76$\,\textdegree C
+with peak $c_p = 2.6$\,kJ/(kg$\cdot$K). This non-uniform thermophysical
+behaviour is the central transitional effect addressed in
+Sections~\ref{sec:results_transitional} and~\ref{sec:rq2_hx_sizing}.
+
+\item[\textbf{Waste Heat Recovery (WHR):}]
+Capturing thermal energy from industrial exhaust or process cooling streams
+that would otherwise be rejected to the environment, and converting it to
+electricity or useful work~\cite{Papapetrou2018}.
+
+\item[\textbf{Thermal Efficiency ($\eta_{th}$):}]
+Net work output divided by total heat input: $\eta_{th} =
+\dot{W}_{net}/\dot{Q}_{in}$. A first-law metric that quantifies energy
+conversion but reveals nothing about the thermodynamic quality of the
+losses.
+
+\item[\textbf{Exergy Efficiency ($\eta_{ex}$):}]
+Net work output divided by the exergy of the heat input: $\eta_{ex} =
+\dot{W}_{net}/\dot{E}_{x,in}$. A second-law metric that accounts for the
+thermodynamic quality of the energy supplied, not merely its magnitude.
+
+\item[\textbf{Back-Work Ratio (BWR):}]
+The fraction of gross turbine output consumed by the compression device:
+$\mathrm{BWR} = \dot{W}_{pump}/\dot{W}_{turbine}$. For SRC: below 1.5\,\%.
+For sCO$_2$ Brayton: 27--80\,\% across the modelled range. For tCO$_2$
+Rankine: 12--23\,\% (higher than the literature-reported 2--5\,\% owing to
+the $P_{low} = 5$\,MPa baseline; sensitivity analysed in
+Section~\ref{sec:plow_sensitivity}).
+
+\item[\textbf{Pinch Point Temperature Difference (PPTD):}]
+The minimum local temperature difference between hot and cold streams at
+any cross-section within a heat exchanger. PPTD governs the trade-off
+between heat recovery and exchanger surface area~\cite{Moran2018}.
+
+\item[\textbf{Levelised Cost of Electricity (LCOE):}]
+A lifecycle-averaged cost in AUD/MWh representing the electricity price
+at which a project breaks even over its operational life, after accounting
+for capital cost, annual operating expenditure, capacity factor, and the
+time value of money~\cite{Short1995}.
+
+\item[\textbf{Specific Flow Exergy ($ex$):}]
+The maximum work extractable from a fluid stream brought reversibly to
+the dead state ($T_0 = 25$\,\textdegree C, $P_0 = 101.325$\,kPa):
+$ex = (h - h_0) - T_0(s - s_0)$.
+
+\item[\textbf{Size Parameter (SP):}]
+A turbomachinery compactness metric: $\mathrm{SP} =
+\dot{V}_{out}^{0.5}/\Delta h_{is}^{0.25}$. A smaller SP indicates a more
+compact turbine for a given net power output~\cite{Macchi2017}.
+
+\item[\textbf{Stodola Ellipse Law:}]
+An empirical approximation describing how turbine mass flow and pressure
+ratio evolve under off-design operation. Here applied in the simplified
+form $\eta_{od} = \eta_0 \cdot [1 - 0.3(1-f)^2]$ where $f$ is the
+mass-flow fraction~\cite{Marchionni2020}.
+
+\end{description}
+
+\section{Knowledge Gaps}
+\label{sec:knowledge_gap}
+
+Five specific gaps in the published literature motivated the design of this
+study:
+
+\bigskip
+\noindent\textbf{Gap 1 --- No three-cycle benchmark under consistent assumptions.}
+Existing studies compare at most two technologies simultaneously, under
+different boundary conditions and cost assumptions, making cross-study
+inference unreliable~\cite{Jiang2023,Kizilkan2020,Baglietto2023}.
+
+\bigskip
+\noindent\textbf{Gap 2 --- Combined exergy and pinch analysis is absent for tCO$_2$.}
+The application of combined exergy-pinch methodology to the tCO$_2$ Rankine
+cycle in a WHR context has not been reported in the accessible
+literature~\cite{Sarkar2009,Nami2017}.
+
+\bigskip
+\noindent\textbf{Gap 3 --- Australian industrial conditions are unrepresented
+in the techno-economic literature.}
+All published LCOE and NPV analyses for CO$_2$ WHR cycles use US or European
+economic parameters. Australian electricity prices, ambient temperatures, and
+supply chain structures differ sufficiently to make direct transplanting of
+overseas conclusions unreliable~\cite{Papapetrou2018,ARENA2023}.
+
+\bigskip
+\noindent\textbf{Gap 4 --- Transitional thermophysical effects in tCO$_2$ heat
+exchangers are not modelled.}
+The sharp $c_p$ peak near the pseudo-critical temperature creates a strongly
+non-uniform temperature-difference profile along the heater. Two-state-point
+energy balances and two-point LMTD sizing cannot represent this profile, so
+the location of the pinch and the required heat exchanger area are
+misestimated. This gap was specifically identified by the project supervisor.
+
+\bigskip
+\noindent\textbf{Gap 5 --- Off-design data for tCO$_2$ cycles are sparse.}
+Characterisation of part-load performance and operational flexibility for
+tCO$_2$ Rankine cycles remains limited, with Yang et al.~\cite{Yang2024}
+representing one of few recent contributions.
+
+\section{Research Questions and Aim}
+\label{sec:rqs}
+
+\begin{mdframed}[linecolor=uqpurple,linewidth=1.5pt,
+  backgroundcolor=uqpurple!5,roundcorner=4pt,
+  innerleftmargin=12pt,innerrightmargin=12pt,
+  innertopmargin=10pt,innerbottommargin=10pt]
+\textit{To compare the Supercritical CO$_2$ Brayton cycle and Transcritical
+CO$_2$ Rankine cycle against the Steam Rankine Cycle for industrial waste heat
+recovery, using thermodynamic modelling and techno-economic analysis, and to
+determine under what conditions CO$_2$ cycles represent the better choice in
+terms of efficiency, capital cost, and economic return within the Australian
+energy transition context.}
+\end{mdframed}
+
+\bigskip
+\begin{description}[leftmargin=1.5em,style=nextline]
+\item[\textbf{RQ1 --- Thermodynamic Performance:}]
+How do thermal efficiency, exergy efficiency, and back-work ratio compare
+for SRC, sCO$_2$ Brayton, and tCO$_2$ Rankine across WHR source temperatures
+of 150--600\,\textdegree C, including sensitivity to recuperator effectiveness
+and condensing pressure?
+
+\item[\textbf{RQ2 --- System Compactness and Capital Cost:}]
+How compact are the three cycles, and what does this imply for capital cost
+(AUD/kW) across the 100\,kW to 5\,MW range at the three Australian case
+study conditions?
+
+\item[\textbf{RQ3 --- Australian Techno-Economic Analysis:}]
+For three representative Australian industrial sites, what are the LCOE, NPV,
+payback period, and probability of economic viability for each cycle under
+realistic uncertainty?
+
+\item[\textbf{RQ4 --- Off-Design and Part-Load Performance:}]
+When the heat source fluctuates, how does each cycle's efficiency degrade,
+and what is the relative operational flexibility of the three technologies?
+\end{description}
+
+\section{Scope and Limitations}
+\label{sec:scope}
+
+The thermodynamic models are steady-state, single-fluid, zero-pressure-drop
+representations of idealised cycles. Real-fluid properties are evaluated using
+CoolProp~6.x~\cite{Bell2014} with the HEOS backend, which provides high
+accuracy near the CO$_2$ critical point. The WHR heat source is modelled as a
+dry ideal gas with constant specific heat; real flue gas composition effects
+are not considered. All three cycles use fixed isentropic efficiencies
+($\eta_{turbine} = 0.85$, $\eta_{pump/compressor} = 0.80$), a known
+simplification explicitly quantified in Section~\ref{sec:discussion_limitations}. Capital
+cost correlations from Weiland et al.~\cite{Weiland2019} and Turton et
+al.~\cite{Turton2012} carry inherent uncertainty of order $\pm$30\,\% and are
+applied below their validated size range; this is explicitly propagated
+through Monte Carlo analysis. Off-design modelling
+uses the simplified Stodola parabolic efficiency correction rather than
+full turbomachinery characteristic maps.
+
+\section{Thesis Structure}
+\label{sec:structure}
+
+Chapter~\ref{ch:litreview} reviews the literature on WHR power cycles,
+transitional CO$_2$ thermophysics, and Australian industrial context.
+Chapter~\ref{ch:method} describes the methodology for all four research
+questions. Chapters~\ref{ch:results_rq1}--\ref{ch:results_rq4} report
+results for RQ1--RQ4 respectively. Chapter~\ref{ch:discussion} synthesises
+across research questions, situates the findings within the broader literature,
+and explicitly addresses limitations. Chapter~\ref{ch:conclusions} states the
+answers to each research question and identifies priority directions for future
+work.
+
+%% ============================================================
+%% CHAPTER 2 — LITERATURE REVIEW
+%% ============================================================
+\chapter{Literature Review}
+\label{ch:litreview}
+
+\section{Industrial Waste Heat Recovery}
+\label{sec:lit_whr}
+
+The quantity of recoverable industrial waste heat is large. Papapetrou et
+al.~\cite{Papapetrou2018} estimated the technically available resource across
+European manufacturing at 300--900\,TWh per year, with roughly one-third
+arising above 300\,\textdegree C. Johnson et al.~\cite{Johnson2008} placed US
+industrial waste heat losses at 20--50\,\% of primary energy input, consistent
+with the European estimate, with high-temperature sources arising primarily
+from metallurgy and cement, medium-grade from refinery and glass, and
+low-grade from compressed gas systems and cooling circuits.
+
+For Australia, the Australian Renewable Energy Agency's (ARENA) industrial
+transformation study identified WHR as one of the most cost-competitive
+near-term options for decarbonising energy-intensive industry~\cite{ARENA2023}.
+The Australian Alliance for Energy Productivity (A2EP)~\cite{A2EP2022}
+compiled an industry-specific database confirming WHR opportunities at
+Australian cement, LNG, and steel facilities at temperatures closely matching
+the three case studies defined for this thesis. A distinguishing feature of
+the Australian context is the co-existence of high industrial electricity
+prices (particularly in the isolated Pilbara grid at AUD\,130/MWh or
+above~\cite{AEMO2024}) with climatic conditions that constrain condenser
+temperatures --- a combination that creates simultaneously attractive economics
+and operational challenges for low-temperature cycle condensation.
+
+\section{Steam Rankine Cycle}
+\label{sec:lit_src}
+
+The SRC has driven industrial power generation since the nineteenth century
+and its design practice is codified across a wide capacity range. Tian et
+al.~\cite{Tian2022} surveyed SRC across WHR temperatures, finding thermal
+efficiencies of 33--38\,\% for subcritical configurations and approaching
+48\,\% for supercritical steam above 550\,\textdegree C. The well-documented
+limitation below 300\,\textdegree C~\cite{Tchanche2011} --- where falling
+saturation pressure constrains maximum turbine inlet conditions --- is the
+primary motivation for CO$_2$ cycle investigation in the medium-grade
+WHR range.
+
+From a second-law perspective, Moran and Shapiro~\cite{Moran2018} identify
+the steam boiler as the dominant SRC loss mechanism. Water boils at a fixed
+saturation temperature while the heat source is at a higher temperature, so
+a sustained temperature difference is maintained throughout the two-phase
+region, generating entropy continuously. CO$_2$ cycles address this by
+heating supercritically and non-isothermally, tracking the source temperature
+profile more closely. This thermodynamic advantage is the foundation of the
+CO$_2$ case, though it must be weighed against differences in component cost
+and operational behaviour.
+
+Capital cost is the SRC's competitive strength. Turton et
+al.~\cite{Turton2012} document established shell-and-tube boiler cost
+correlations that benefit significantly from economies of scale. Baglietto et
+al.~\cite{Baglietto2023} confirmed that at larger WHR scales, steam's mature
+supply chain erodes the sCO$_2$ capital cost advantage, a finding corroborated
+by the present study's RQ2 analysis.
+
+\section{Supercritical CO$_2$ Brayton Cycle}
+\label{sec:lit_sco2}
+
+Dostal's 2004 MIT dissertation~\cite{Dostal2004} established the foundational
+analysis of near-critical compression and demonstrated the compactness
+advantage over steam through detailed cycle modelling. Crespi et
+al.~\cite{Crespi2017} reviewed major sCO$_2$ configurations --- simple
+recuperated, recompression, split-flow --- and documented thermal efficiencies
+of 40--50\,\% at turbine inlet temperatures above 500\,\textdegree C. Ahn et
+al.~\cite{Ahn2015} assessed technology readiness, identifying turbomachinery
+as the critical engineering challenge and noting the absence of demonstrated
+commercial-scale plant.
+
+The WHR case for sCO$_2$ is best illustrated by Kizilkan~\cite{Kizilkan2020},
+who found sCO$_2$ producing 9,363\,kW net versus 8,275\,kW for SRC at a
+350\,\textdegree C cement WHR source --- a 13.1\,\% improvement at respective
+thermal efficiencies of 27.6\,\% and 24.2\,\%. Baglietto et
+al.~\cite{Baglietto2023} added the critical qualifier that the sCO$_2$ capital
+cost advantage over steam erodes at larger scales due to the immaturity of
+the PCHE supply chain.
+
+Below approximately 350\,\textdegree C, sCO$_2$ compressor back-work rises
+to 20--40\,\% and continues upward as temperature falls~\cite{Crespi2017}.
+This is the primary thermodynamic motivation for the tCO$_2$ cycle.
+
+\section{Transcritical CO$_2$ Rankine Cycle}
+\label{sec:lit_tco2}
+
+Replacing gas compression with liquid pumping reduces BWR to the 2--5\,\%
+range reported in the literature at moderate-to-high temperatures, while
+retaining the supercritical heat addition advantage over SRC. Jiang et
+al.~\cite{Jiang2023} reported up to 4.98\,\% better thermal efficiency for a
+recompression tCO$_2$ configuration over equivalent sCO$_2$ Brayton, which
+informed the working hypothesis of this study. Lee and
+Kim~\cite{Lee2023} provided experimental validation of a small-scale tCO$_2$
+Rankine system, supporting the modelling assumptions of comparable simulation
+work.
+
+Yang et al.~\cite{Yang2024} examined off-design behaviour of tCO$_2$ cycles
+for low-grade WHR, quantifying efficiency degradation at part-load that had
+not previously been characterised --- directly relevant to RQ4 of this study.
+Liu et al.~\cite{Liu2024} demonstrated that optimal high-side pressure
+increases with turbine inlet temperature, a result incorporated into the
+parametric sweep methodology described in Chapter~\ref{ch:method}. Wang et
+al.~\cite{Wang2025} extended this to variable heat source conditions.
+
+A practical constraint specific to Australian conditions deserves emphasis.
+The tCO$_2$ cycle requires condensation below 31.1\,\textdegree C. In the
+Pilbara in summer (ambient 35--42\,\textdegree C~\cite{BOM2024}) or coastal
+Queensland, this requires supplementary mechanical or evaporative cooling,
+adding capital cost and parasitic load not accounted for in European or
+North American studies. This study treats this constraint explicitly in the
+RQ3 economic analysis.
+
+\section{Transitional Thermophysical Effects in CO$_2$ Heat Exchangers}
+\label{sec:lit_transitional}
+
+The thermodynamic consequences of the pseudo-critical $c_p$ peak in heat
+exchanger design have attracted increasing attention since Dostal's original
+analysis~\cite{Dostal2004}. Sarkar~\cite{Sarkar2009} identified the primary
+heat exchanger as the dominant exergy destruction site in the sCO$_2$
+recompression cycle, attributing this to the strongly non-uniform temperature
+difference between source and working fluid along the exchanger length. Nami
+et al.~\cite{Nami2017} demonstrated that combined exergy-economic optimisation
+surfaces improvement opportunities invisible to first-law analysis.
+
+For the tCO$_2$ cycle specifically, CO$_2$ enters the supercritical heater at
+pump exit temperature (24--32\,\textdegree C at 12--20\,MPa), passes through
+the pseudo-critical region with its pronounced $c_p$ peak, and emerges at
+turbine inlet temperature. Because $c_p$ is largest near $T_{pc}$, a large
+fraction of the total heat transfer is absorbed within a narrow temperature
+band: the CO$_2$ temperature rises slowly through the pseudo-critical region
+and then quickly beyond it. Against a waste-gas stream whose temperature falls
+linearly with heat duty, this produces a temperature-difference profile that
+is pinched at the terminals and widest in the middle of the exchanger --- the
+opposite of the uniform driving force that a two-point LMTD calculation
+assumes. The quantitative consequence for heat exchanger sizing, addressed in
+Section~\ref{sec:rq2_hx_sizing}, had not been reported in the literature
+accessed for this study, representing Gap~4 identified in
+Section~\ref{sec:knowledge_gap}.
+
+\section{Capital Cost Correlations for WHR Power Systems}
+\label{sec:lit_cost}
+
+The published cost literature for small-scale CO$_2$ power systems is limited
+and predominantly US-based. The most complete public set of correlations is
+that of Weiland, Lance and Pidaparti~\cite{Weiland2019}, derived from
+US~DOE project vendor quotes (2017 USD). It gives the PCHE/recuperator cost as
+$C_{HX} = 49.45 \cdot UA^{0.7544} \cdot f_T$, where $UA$ is in W/K and $f_T$
+is a temperature penalty factor that exceeds unity above 550\,\textdegree C;
+the radial sCO$_2$ turbine cost as $406{,}200 \cdot \dot{W}_{sh}^{0.8}$
+($\dot{W}_{sh}$ in MW); and direct air coolers as $32.88 \cdot UA^{0.75}$.
+Weiland et al. report uncertainty bands of $-31$\,\% to $+38$\,\% on the
+recuperator correlation and $-32$\,\% to $+51$\,\% on the radial turbine
+correlation, and the turbine data span 8--35\,MW, so application at the
+sub-5\,MW scale of industrial WHR is an extrapolation. Weiland and
+Thimsen~\cite{Weiland2016} set out the steady-state modelling assumptions and
+constraints (compressor inlet conditions, recuperator limits) that underpin
+such cycle models. No comparable public correlation exists for small steam
+turbine-generators; the US~DOE industrial benchmark~\cite{DOE2012} of roughly
+USD\,900/kW at 150\,kW falling to USD\,200/kW at 2\,MW (equipment only) is
+the most widely cited small-scale reference.
+
+Turton et al.~\cite{Turton2012} provide cost functions for conventional
+equipment (centrifugal pumps and compressors, shell-and-tube heat exchangers)
+in 2001 USD (CEPCI 397), which can be escalated via the Chemical Engineering
+Plant Cost Index (CEPCI)~\cite{CEPCI2026}. The 2017 annual CEPCI of 567.5 and
+the estimated 2026 value of approximately 830 imply an escalation factor of
+$1.46\times$ for the Weiland correlations. Conversion of USD to AUD at the
+April 2026 spot rate (1 USD = 1.395 AUD, RBA~\cite{RBA2026}) completes the
+localisation.
+
+\section{Off-Design Analysis Methods}
+\label{sec:lit_offdesign}
+
+The Stodola ellipse law provides a widely-used approximation for turbine
+off-design mass flow as a function of inlet/outlet pressures~\cite{Marchionni2020}.
+In its simplified form applicable to efficiency estimation, it approximates
+part-load isentropic efficiency degradation as a parabolic function of
+mass-flow fraction, consistent with the incidence-loss behaviour of radial
+turbines. Marchionni et al.~\cite{Marchionni2020} reviewed off-design
+performance of advanced thermodynamic cycles and proposed a multi-attribute
+flexibility scoring framework that weights turndown ratio, part-load efficiency
+retention, and startup complexity --- the framework adopted for RQ4 in this
+study.
+
+Yang et al.~\cite{Yang2024} examined off-design performance of tCO$_2$
+cycles specifically and found efficiency degradation at part-load had not
+previously been quantified. Their results inform the design-point calibration
+of the Stodola correction used in Chapter~\ref{ch:results_rq4}.
+
+\section{Summary and Gap Identification}
+\label{sec:lit_summary}
+
+The literature reviewed here is extensive but incomplete in five specific
+respects identified in Section~\ref{sec:knowledge_gap}. The thermodynamic
+promise of CO$_2$ WHR cycles is well established. What is missing is a single,
+unified comparison of all three cycle architectures under consistent Australian-
+specific assumptions, incorporating transitional thermophysical effects, full
+capital cost estimation, and off-design analysis. The methodology described in
+Chapter~\ref{ch:method} addresses all five gaps within a single undergraduate
+thesis scope.
+

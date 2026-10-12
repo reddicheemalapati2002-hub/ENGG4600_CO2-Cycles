@@ -1,0 +1,313 @@
+%% ============================================================
+%% CHAPTER 8 — DISCUSSION
+%% ============================================================
+\chapter{Discussion}
+\label{ch:discussion}
+
+The four results chapters tell one story. Under consistent, second-law-
+consistent assumptions and with the waste-gas stream treated as what it
+is --- a fixed resource at a warm site --- the steam Rankine cycle is the
+most efficient, the cheapest and the most bankable option at 350 and
+500\,\textdegree C, the transcritical CO$_2$ cycle recovers the most energy
+and is the most flexible option but needs a cold heat sink that Australia
+does not naturally provide, and the supercritical CO$_2$ Brayton cycle, in
+its simple recuperated form, is not competitive below 500\,\textdegree C at
+all. This chapter explains why these conclusions differ from much of the
+published literature and from this project's own Interim Report, sets out
+the figure of merit that should be used for WHR cycle selection, develops
+the Australian heat-sink constraint, and states the limitations within which
+the conclusions hold.
+
+\section{Why the Literature's CO$_2$ Advantage Did Not Appear}
+\label{sec:discussion_paradox}
+
+Four boundary conditions account for the difference between this study and
+the 5--15 point efficiency advantages reported for CO$_2$ cycles by Kizilkan
+\cite{Kizilkan2020}, Jiang et al.~\cite{Jiang2023} and Crespi et
+al.~\cite{Crespi2017}; each is quantified in Chapter~\ref{ch:results_rq1}.
+
+\begin{enumerate}[leftmargin=1.8em,itemsep=4pt]
+\item \textbf{Recuperator energy balance (Finding~3).} With the effectiveness
+applied to the limiting stream, recuperation adds 3--10 points to the
+tCO$_2$ cycle, not 12--20. Near the critical point the high-pressure stream
+can absorb two to three times more enthalpy per kelvin than the low-pressure
+stream can supply; a cold-side-only effectiveness transfers heat the exhaust
+does not have. The Interim Report made this error, and some published
+models that report unusually high recuperated efficiencies may as well.
+\item \textbf{Heat sink temperature (Findings~11--13).} The sCO$_2$ cycle's
+efficiency rests on compressing a dense near-critical fluid; at a
+36\,\textdegree C compressor inlet, which is what Australian cooling water
+allows, the fluid is already gas-like and the back-work ratio is 31--64\,\%
+at the three sites. Moving the inlet from 32 to 40\,\textdegree C removes
+two-fifths of the cycle's efficiency at 200\,\textdegree C. The tCO$_2$
+baseline condenses at 14\,\textdegree C, which no Australian site can
+supply without refrigeration.
+\item \textbf{Steam baseline.} Many comparisons evaluate steam at a single
+modest pressure. At turbine inlet temperatures of 350--500\,\textdegree C a
+10\,MPa steam cycle with a 10\,kPa condenser reaches 32--34\,\% and is a
+demanding baseline (Finding~1). When the boiler is integrated with the
+stream the steam pressure falls to 0.9--3.7\,MPa and the site efficiency to
+24--31\,\% (Finding~14), close to Kizilkan's 24\,\%; the CO$_2$ cycles then
+compete on recovery depth, not on efficiency.
+\item \textbf{Cycle layout.} The simple recuperated sCO$_2$ layout
+modelled here is the standard single-loop configuration. Its recuperated
+heater inlet of 100--279\,\textdegree C means it recovers only 60--65\,\% of
+the heat that the tCO$_2$ cycle recovers from the same stream (Finding~15). Cascade, dual-recuperated and preheating layouts
+that address this were outside the scope of a consistent three-cycle
+comparison and are the obvious next step (Section~\ref{sec:future_work}).
+\end{enumerate}
+
+The disagreement, then, is not with the thermodynamics of CO$_2$ but with
+the conditions under which it is attractive: a cold sink, a high source
+temperature, and a layout designed for deep recovery. Australian industrial
+WHR at 200--500\,\textdegree C offers none of the first two.
+
+\section{The Figure of Merit for Waste Heat Recovery}
+\label{sec:discussion_fom}
+
+Thermal efficiency is the wrong single number for WHR cycle selection. The
+owner of a 50\,kg/s cement exhaust does not care what fraction of the
+heat entering the cycle becomes electricity; they care how much electricity
+the exhaust yields and what the plant costs. Equation~\eqref{eq:wgas},
+$w_{gas} = \eta_{th}\,c_{p,gas}(T_{src} - T_{gas,out})$, captures the first
+quantity, and the results of Chapters~\ref{ch:results_rq2}
+and~\ref{ch:results_rq3} show that the second factor can outweigh the
+first: tCO$_2$ at CS2 is 1.2~points more efficient than steam but recovers
+75\,\% more power; sCO$_2$ at CS1 is 1.4~points less efficient than steam but
+recovers 25\,\% less.
+
+The second quantity, cost, must then be evaluated at the output the cycle
+actually delivers, because specific capital cost falls steeply with size
+(Table~\ref{tab:capital}). A fixed-output comparison at 1\,MWe --- the basis
+of the Interim Report and of much of the literature --- reduces the whole
+economic analysis to the capital cost ranking, because with free heat and a
+common life and capacity factor LCOE is proportional to TEC/kW
+(Finding~25). The fixed-source framing used here is the one a feasibility
+study would use, and it is the one on which tCO$_2$ earns its single
+economic win, at the 200\,\textdegree C site.
+
+\section{Heat Rejection in a Warm Climate}
+\label{sec:discussion_australian}
+
+The decisive Australian constraint is the heat sink. Three results combine:
+
+\begin{itemize}[leftmargin=1.5em,itemsep=3pt]
+\item The tCO$_2$ cycle at $P_{low} = 5$\,MPa condenses at 14.3\,\textdegree C
+and needs a sink near 4\,\textdegree C (Finding~11). Cooling-tower water at
+Gladstone, Sydney or the Pilbara is 20--32\,\textdegree C for most of the
+year~\cite{BOM2024}; seawater at the Pilbara coast exceeds 25\,\textdegree C.
+\item Supplying that sink with an electric chiller would consume 63--134\,\%
+of the cycle's net output at COP~4 (Finding~12). The tCO$_2$ NPV advantage
+at CS2 (Finding~23) therefore cannot be realised there; it exists only where
+a natural cold sink is available --- cold river or groundwater, a deep-water
+intake, or a co-located refrigeration load.
+\item Raising $P_{low}$ to 7\,MPa (condensing at 28.7\,\textdegree C) makes
+the cycle compatible with evaporative cooling outside summer but costs
+23--30\,\% of the recovered work; at CS1 the result is exactly the steam
+cycle's 52.8\,kJ per kilogram of gas, at a higher capital cost. At the
+Pilbara, with summer wet-bulb temperatures above 28\,\textdegree C, even
+7\,MPa is marginal.
+\end{itemize}
+
+The exergy analysis flags the same issue from the other direction: the
+negative condenser term in Table~\ref{tab:exergy_sites} is the unpaid
+refrigeration exergy. The sCO$_2$ cycle faces a milder version of the
+constraint at its compressor inlet (Finding~13). The steam cycle, condensing
+at 45.8\,\textdegree C, is the only one of the three that is indifferent to
+Australian ambient conditions, and this, more than any thermodynamic
+property, is why it emerges as the default choice.
+
+\section{Cycle Selection Framework for Australian Industry}
+\label{sec:discussion_framework}
+
+Table~\ref{tab:selection} condenses the thirty findings into a selection
+guide for a 0.3--3.5\,MWe plant at 2026 costs and prices.
+
+\begin{table}[H]
+\centering
+\caption{Recommended cycle selection for Australian industrial WHR
+(2026 conditions, fixed-source basis).}
+\label{tab:selection}
+\renewcommand{\arraystretch}{1.3}
+\small
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{2.6cm}
+  >{\raggedright\arraybackslash}p{2.4cm} >{\raggedright\arraybackslash}X}
+\toprule
+\rowcolor{tableheader}
+\textbf{Source} & \textbf{Recommend} & \textbf{Basis and conditions} \\
+\midrule
+\rowcolor{rowgray}
+$\ge$\,450\,\textdegree C (EAF, kiln) & SRC &
+LCOE AUD\,31/MWh, NPV 12.4\,M, payback 3.2\,yr, 100\,\% Monte Carlo
+viability; steam is also the most efficient cycle here. tCO$_2$ only if load
+is highly variable and a cold sink exists. \\
+300--450\,\textdegree C (cement) & SRC &
+LCOE AUD\,35/MWh, NPV 11.4\,M, payback 4.2\,yr, 99.8\,\% viability. tCO$_2$
+recovers 29\,\% more power but costs 94\,\% more; its NPV is 12\,\% lower and
+its sink requirement is unmet. \\
+\rowcolor{rowgray}
+150--300\,\textdegree C (gas processing) & SRC, or tCO$_2$ with a natural cold sink &
+Both marginal: LCOE 96--100 against a 130\,AUD/MWh price, payback 10--11\,yr,
+68--72\,\% viability. tCO$_2$ gives 53\,\% more NPV where water below
+$\approx$10\,\textdegree C is available; otherwise steam, or no project. \\
+Any temperature & Not sCO$_2$ (simple recuperated) &
+Negative or marginal NPV at every site; $P(\mathrm{NPV}>0)$ 0.5--49\,\%.
+Reconsider only with a cascade layout, a compressor inlet below
+33\,\textdegree C, and sources above 500\,\textdegree C. \\
+\rowcolor{rowgray}
+Fluctuating load & tCO$_2$ preferred & Marchionni score 0.78 against 0.73
+(SRC) and 0.71 (sCO$_2$); steam is weakest at 200\,\textdegree C. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Three qualifications apply. First, the steam recommendation at
+200\,\textdegree C is weak: with an IRR of 12\,\% against a 7\,\% discount
+rate and a 28\,\% chance of loss, the project depends on the Pilbara price
+premium and would not proceed at NEM prices. Second, the tCO$_2$ option at
+any site should be evaluated with the actual sink: with cold water the cycle
+is the best choice at 200\,\textdegree C; with a chiller it is not viable;
+at 7\,MPa it is a more expensive equivalent of steam. Third, all three
+cycles are small plants in cost terms --- heat exchangers are 35--43\,\% of
+CO$_2$ equipment cost and heat rejection 17--44\,\% of every cycle's --- so
+the recommendation is sensitive to the heat exchanger correlations, which is
+why the Monte Carlo range of $\pm30$\,\% on capital was carried through.
+
+\section{Limitations and Assumptions}
+\label{sec:discussion_limitations}
+
+\begin{limitbox}
+\textbf{L1 --- Constant turbomachinery efficiencies.} $\eta_t = 0.85$ and
+$\eta_{p/c} = 0.80$ are applied at all sizes and all three cycles. Real
+sub-MW machines are less efficient, and the penalty is probably larger for
+the high-pressure CO$_2$ turbines than for steam.
+
+\textbf{L2 --- No pressure drop.} All exchangers are isobaric. PCHE pressure
+drops of 1--2\,\% of the high-side pressure would reduce the CO$_2$ cycle
+efficiencies by roughly one point and raise the steam cycle's by nothing.
+
+\textbf{L3 --- Cost correlations extrapolated.} The Weiland turbine and
+generator correlations begin at 8 and 4\,MW; the Turton compressor at
+450\,kW. Their stated uncertainties ($-32$ to $+51$\,\% on the turbine) are
+wider than the $\pm30$\,\% carried in the Monte Carlo. The steam turbine
+benchmark is for back-pressure units; a condensing turbine with VFR of
+45--148 would cost more, which would narrow but not close the gap to tCO$_2$
+at CS1 and CS3.
+
+\textbf{L4 --- Heat rejection modelled uniformly.} A 10\,K mean temperature
+difference and the Weiland air-cooler correlation are applied to all three
+cycles. This is conservative for the 46\,\textdegree C steam condenser
+(cheaper water-cooled units exist) and optimistic for the 14\,\textdegree C
+tCO$_2$ condenser (no chiller is costed; Finding~12 quantifies the omission).
+
+\textbf{L5 --- CO$_2$ pressures not re-optimised for recovery.} The CO$_2$
+high- and low-side pressures follow the RQ1 rules, whereas the steam
+pressure was optimised for $w_{gas}$ at each site. A tCO$_2$ high-pressure
+optimisation on the same basis would improve its results by a few per cent.
+
+\textbf{L6 --- Simple cycle layouts.} One layout per cycle, no reheat,
+recompression, cascade or split flow. This is the right basis for a
+like-for-like comparison but understates what an optimised sCO$_2$ system
+could do above 500\,\textdegree C.
+
+\textbf{L7 --- Monte Carlo scope.} Capital, price and capacity factor are
+varied; source temperature and flow, discount rate, O\&M and plant life are
+not. Correlation between variables is ignored.
+
+\textbf{L8 --- Part-load model.} A single parabolic Stodola coefficient
+calibrated to one tCO$_2$ dataset~\cite{Yang2024} is applied to all three
+cycles, and the heater is not re-integrated at part load.
+
+\textbf{L9 --- Economic scope.} No carbon price, no grid-connection or
+site-integration costs, no availability penalty for the immature CO$_2$
+technologies, and an 85\,\% capacity factor that may be optimistic for
+batch processes.
+\end{limitbox}
+
+None of these limitations favours the CO$_2$ cycles systematically except
+L4 (no chiller) and L3 (back-pressure steam benchmark), which act in opposite
+directions; L1, L2 and L3 (turbine extrapolation) act against them. The
+qualitative conclusions --- steam first above 300\,\textdegree C, tCO$_2$
+viable only with a cold sink, simple sCO$_2$ not viable --- are unlikely to
+change within these uncertainties; the margins would.
+
+\section{Comparison With Published Literature}
+\label{sec:discussion_comparison}
+
+The present results agree with Baglietto et al.~\cite{Baglietto2023} that the
+mature steam supply chain gives steam a capital cost advantage that CO$_2$
+cycles do not overcome at industrial WHR scale, and extend that finding to
+the smaller 0.3--3.5\,MWe range and to Australian prices. They agree with
+Kizilkan~\cite{Kizilkan2020} on the steam efficiency at a 350\,\textdegree C
+cement source once the boiler is integrated with the stream, but not on the
+sCO$_2$ advantage, for the reasons given in
+Section~\ref{sec:discussion_paradox}. They agree in direction with Jiang et
+al.~\cite{Jiang2023} that tCO$_2$ outperforms sCO$_2$ at low temperature and
+with Yang et al.~\cite{Yang2024} and Marchionni et al.~\cite{Marchionni2020}
+that pumped CO$_2$ cycles have the better part-load behaviour. The
+observation that recuperated sCO$_2$ cycles recover a waste-heat stream
+shallowly is well known in the sCO$_2$ community and is the reason for the
+cascade and split-flow WHR layouts described by Crespi et
+al.~\cite{Crespi2017}; this thesis quantifies the penalty for the simple
+layout against two alternatives on one basis. The heater-integration result
+(Findings~6 and~18) is, to the author's knowledge, the first explicit
+demonstration that the pseudo-critical $c_p$ peak produces a double-pinched,
+mid-bulging profile rather than an interior pinch, and that two-point LMTD
+sizing overestimates the tCO$_2$ heater by a factor of two to three at
+$\varepsilon = 0$.
+
+\section{Revisions Since the Interim Report}
+\label{sec:discussion_revisions}
+
+For transparency, the five corrections made between the Interim Report and
+this thesis, and their consequences, are listed in
+Table~\ref{tab:revisions}. Each was found by re-checking the model code
+against its own outputs after the Interim Report was marked.
+
+\begin{table}[H]
+\centering
+\caption{Corrections made after the Interim Report.}
+\label{tab:revisions}
+\renewcommand{\arraystretch}{1.3}
+\small
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{3.4cm}
+  >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}p{4.6cm}}
+\toprule
+\rowcolor{tableheader}
+\textbf{Correction} & \textbf{What was wrong} & \textbf{Consequence} \\
+\midrule
+\rowcolor{rowgray}
+Recuperator energy balance (Eq.~\ref{eq:recup}) &
+Effectiveness applied to the cold stream only; hot stream cooled below the
+cold inlet (second-law violation) at every temperature for both CO$_2$ cycles. &
+CO$_2$ efficiencies fall 3--11 points; sCO$_2$/SRC crossover at
+362\,\textdegree C and ``tCO$_2$ beats SRC everywhere'' withdrawn (Finding~1). \\
+Heater gas profile (Eq.~\ref{eq:gas_profile}) &
+Gas temperature linear in node index, not in heat duty, in the pinch
+diagrams; gave a constant 10\,K gap and a spurious ``mid-exchanger pinch at
+129\,\textdegree C''. &
+Double pinch at both terminals with a mid-exchanger bulge (Finding~6).
+LMTD comparison (Finding~18) unaffected, as it already used the correct
+profile. \\
+\rowcolor{rowgray}
+Heater sizing in the cost model &
+sCO$_2$ heater driving force computed from an expression that cancelled to
+$-10$\,K (giving 3,400--7,000\,K); steam boiler driving force from an ad hoc
+terminal estimate; tCO$_2$ heater at the worst-case 10\,K. &
+sCO$_2$ no longer the cheapest cycle; steam cheapest at every site
+(Finding~19). \\
+Cost basis &
+Turbine coefficients not traceable to the cited source; condenser omitted;
+compressor costed as a pump. &
+Consistent correlations (Table~\ref{tab:cost_basis}); heat rejection
+17--44\,\% of equipment cost (Finding~21). \\
+\rowcolor{rowgray}
+Economic basis &
+Fixed 1\,MWe output regardless of stream; simple payback; steam at
+0.95\,$P_{sat}$ at a 200\,\textdegree C source (saturation 2\,K below the
+source). &
+Fixed-source basis with pinch-limited steam pressure; discounted payback;
+tCO$_2$ NPV lead at 200\,\textdegree C (Finding~23). \\
+\bottomrule
+\end{tabularx}
+\end{table}

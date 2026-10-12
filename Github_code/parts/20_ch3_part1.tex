@@ -1,0 +1,260 @@
+%% ============================================================
+%% CHAPTER 3 — METHODOLOGY
+%% ============================================================
+\chapter{Methodology}
+\label{ch:method}
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+    node distance=0.8cm,
+    box/.style={rectangle, draw=uqpurple, fill=uqpurple!5, thick, rounded corners, text width=0.9\textwidth, minimum height=1.2cm, align=center, font=\small, inner sep=1ex},
+    arrow/.style={-{Stealth[scale=1.2]}, thick, uqpurple}
+]
+
+\node[box] (lit) {\textbf{Phase 1: Knowledge Gap \& Validation} \\ Literature review, parameter selection, and CoolProp/NIST model validation.};
+
+\node[box, below=of lit] (thermo) {\textbf{Phase 2: Thermodynamic \& Exergy Modelling (RQ1)} \\ First-law and second-law nodal analysis. Multi-point T-H pinch extraction.};
+
+\node[box, below=of thermo] (sizing) {\textbf{Phase 3: Component Sizing \& Capital Cost Estimation (RQ2)} \\ NTU-effectiveness heat exchanger sizing (with pseudo-critical correction) and turbine VFR/SP calculation.};
+
+\node[box, below=of sizing] (econ) {\textbf{Phase 4: Techno-Economic \& Off-Design Analysis (RQ3 \& RQ4)} \\ LCOE/NPV modelling, 10,000-sample Monte Carlo uncertainty, and Stodola part-load degradation.};
+
+\draw[arrow] (lit) -- (thermo);
+\draw[arrow] (thermo) -- (sizing);
+\draw[arrow] (sizing) -- (econ);
+
+\end{tikzpicture}
+\caption{Overview of the interconnected four-phase methodology used to address RQ1--RQ4.}
+\label{fig:methodology_flow}
+\end{figure}
+
+The research was structured in four phases corresponding to the four research
+questions. The approach was set out in the thesis proposal, substantially
+expanded in the Interim Report, and revised during the final modelling work
+described here. Three revisions made after the Interim Report are material to
+the results and are flagged where they arise: (i)~the recuperator energy
+balance is limited by both streams (Section~\ref{sec:method_recup}), which
+lowers the CO$_2$ cycle efficiencies reported at the interim stage;
+(ii)~every primary heater is integrated with the waste-gas stream using a
+duty-linear gas profile and a 10\,K approach (Section~\ref{sec:method_pinch});
+and (iii)~the techno-economic comparison is made on a fixed-source basis
+(Section~\ref{sec:method_rq3}).
+
+\section{Phase 1 --- Literature Review}
+\label{sec:method_lit}
+
+A structured search was conducted across Scopus, Web of Science, and Google
+Scholar following the PRISMA framework, covering WHR publications from 2005
+to 2025 with five foundational pre-2005 sources included on merit (Dostal
+2004; Short et al.\ 1995; Moran \& Shapiro 2018; Turton et al.\ 2012; Bell
+et al.\ 2014). Coverage was organised around six themes: cycle thermodynamics
+and variants; experimental and simulation performance data; transitional and
+pseudo-critical CO$_2$ thermophysics; heat exchanger technology for
+high-pressure CO$_2$; capital and operating cost data; and Australian
+industrial waste heat availability. Thirty-two references were retained after
+relevance screening; 29 are cited in the body of the thesis.
+
+\section{Thermodynamic Modelling (RQ1)}
+\label{sec:method_thermo}
+
+\subsection{Cycle Architecture and State-Point Models}
+
+Steady-state energy balance models for all three cycles were implemented in
+Python\,3.9 using the CoolProp\,6.x library~\cite{Bell2014} for
+thermodynamic property evaluation. The HEOS (Helmholtz Energy Equation of
+State) backend was used throughout in preference to the default BICUBIC
+interpolation because of its superior accuracy near the CO$_2$ critical
+point, where the tCO$_2$ pump exit and the sCO$_2$ compressor inlet both
+operate. At each state point four properties are extracted: specific enthalpy
+($h$), specific entropy ($s$), density ($\rho$), and temperature ($T$).
+
+Energy balances at each state point follow standard open-system forms. For
+turbomachinery:
+\begin{equation}
+\dot{W} = \dot{m}(h_{in} - h_{out})
+\label{eq:turbomachinery}
+\end{equation}
+For heat exchangers:
+\begin{equation}
+\dot{Q} = \dot{m}(h_{out} - h_{in})
+\label{eq:hx}
+\end{equation}
+Isentropic efficiency is applied as:
+\begin{equation}
+h_{out} = h_{in} + \frac{h_{out,is} - h_{in}}{\eta_{is}}
+\quad\text{(compression)}
+\label{eq:compression}
+\end{equation}
+\begin{equation}
+h_{out} = h_{in} - \eta_{is}(h_{in} - h_{out,is})
+\quad\text{(expansion)}
+\label{eq:expansion}
+\end{equation}
+Values of $\eta_{turbine} = 0.85$ and $\eta_{pump/compressor} = 0.80$ are
+applied uniformly to all three cycles, ensuring genuine comparability. These
+values are standard for preliminary analysis of small-to-medium scale
+turbomachinery~\cite{Macchi2017} and represent a known simplification
+addressed further in Section~\ref{sec:discussion_limitations}.
+
+All heat exchangers and pipe runs are modelled as isobaric processes
+($\Delta P = 0$) in the thermodynamic analysis phase. Real frictional pressure
+drop --- particularly significant in CO$_2$ PCHEs --- is an identified
+limitation acknowledged and quantified in Section~\ref{sec:discussion_limitations}.
+
+\subsection{Cycle-Specific Parametric Assumptions}
+
+The tCO$_2$ high-side pressure is scaled linearly from 12\,MPa at
+150\,\textdegree C to 20\,MPa at 350\,\textdegree C and above, following
+the optimal pressure relationship of Liu et al.~\cite{Liu2024}
+($P_{high} = \min[20, \max(12,\, 8 + 0.048\,(T-100))]$\,MPa). Low-side
+pressure is held at 5\,MPa for the baseline, corresponding to a condenser
+temperature of 14.3\,\textdegree C. The recuperator effectiveness baseline is
+$\varepsilon = 0.70$ for tCO$_2$ and $\varepsilon = 0.85$ for sCO$_2$.
+
+\phantomsection\label{sec:method_recup}
+The recuperator effectiveness is applied to the stream with the smaller
+enthalpy capacity, so that neither stream can be driven past the inlet
+temperature of the other:
+\begin{equation}
+Q_{recup} = \varepsilon \cdot \min\!\big[\,h_{cold}(T_{hot,in}) - h_{cold,in},\;
+h_{hot,in} - h_{hot}(T_{cold,in})\,\big]
+\label{eq:recup}
+\end{equation}
+This is the standard $\varepsilon$-NTU definition~\cite{Moran2018}. It
+matters for CO$_2$ because $c_p$ differs strongly between the high- and
+low-pressure sides near the critical point: at the CS2 condition the cold
+(12.8\,MPa) side can absorb 251\,kJ/kg before reaching the turbine exhaust
+temperature, whereas the hot (5\,MPa) side can release only 113\,kJ/kg before
+reaching the pump exit temperature. Defining $\varepsilon$ on the cold side
+alone, as was done in the Interim Report, transfers 176\,kJ/kg and drives the
+hot stream to 14\,\textdegree C --- 10\,K \emph{below} the stream it is
+heating --- which violates the second law. Equation~\eqref{eq:recup} is used
+throughout this thesis, and the resulting efficiencies are lower than the
+interim values (Section~\ref{sec:results_firstlaw}). The recuperator is also
+discretised in 200 enthalpy steps to confirm that no internal temperature
+crossover occurs (Section~\ref{sec:method_rq2}).
+
+The sCO$_2$ cycle uses $P_{high} = 20$\,MPa and $P_{low} = 8$\,MPa, with
+the compressor inlet set to $T_c + 5$\,K (35.98\,\textdegree C) to guarantee
+operation in the supercritical region and maintain the near-critical
+compressibility benefit.
+
+In the parametric sweep the SRC uses $P_{high} = \min[10\,\text{MPa},\;
+0.95 \times P_{sat}(T_{TIT})]$, i.e.\ the highest subcritical pressure that
+leaves the turbine inlet slightly superheated, and $P_{low} = 10$\,kPa
+(condenser temperature 45.8\,\textdegree C), a typical industrial condensing
+pressure. This sweep characterises each cycle as a function of turbine inlet
+temperature only; when the cycles are integrated with a real waste-gas stream
+(Section~\ref{sec:method_rq2}) the steam pressure is instead chosen by the
+boiler pinch constraint, which gives substantially lower pressures.
+
+\subsection{Model Validation}
+
+CoolProp outputs were cross-validated against NIST Webbook
+data~\cite{Lemmon2018} at two SRC state points (Table~\ref{tab:validation}).
+Both deviations lie well within the 1\,\% acceptance criterion. CoolProp
+evaluates the CO$_2$ critical point as $T_c = 30.98$\,\textdegree C and
+$P_c = 7.377$\,MPa, matching NIST REFPROP to within 0.04\,\%.
+
+\begin{table}[H]
+\centering
+\caption{SRC model validation against NIST Webbook reference data.}
+\label{tab:validation}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}X
+  >{\centering\arraybackslash}p{2.5cm}
+  >{\centering\arraybackslash}p{2.5cm}
+  >{\centering\arraybackslash}p{2.5cm}
+  >{\centering\arraybackslash}p{2.0cm}}
+\toprule
+\rowcolor{tableheader}
+\textbf{State point} & \textbf{NIST $h$} & \textbf{Model $h$} &
+\textbf{NIST $s$} & \textbf{Deviation} \\
+\rowcolor{tableheader}
+& \textbf{(kJ/kg)} & \textbf{(kJ/kg)} & \textbf{(kJ/kg$\cdot$K)} & \\
+\midrule
+Saturated liquid, 10\,kPa & 191.83 & 191.81 & 0.6493 & 0.010\,\% \\
+\rowcolor{rowgray}
+Superheated steam, 400\,\textdegree C, 10\,MPa
+& 3096.5 & 3097.45 & 6.2120 & 0.031\,\% \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+The global exergy balance (Eq.~\ref{eq:exergy_balance}) closes to machine
+precision ($<10^{-12}$\,kJ/kg) for all three cycles, confirming internal
+consistency of the second-law model.
+
+\subsection{Parametric Sweep}
+
+The primary sweep covers TIT from 150 to 600\,\textdegree C in
+25\,\textdegree C steps. At each temperature, $\eta_{th}$, net specific
+work, BWR, and exergy destruction by component are recorded. Separate sweeps
+for recuperator effectiveness (Section~\ref{sec:method_sensitivity}) and
+low-side pressure (Section~\ref{sec:method_sensitivity}) extend the analysis
+beyond the single-parameter baseline.
+
+\section{Exergy Analysis (RQ1)}
+\label{sec:method_exergy}
+
+An exergy balance is applied to every cycle component at a common turbine
+inlet temperature of 400\,\textdegree C and at the three site design points
+(Section~\ref{sec:method_rq2}). The dead state is $T_0 = 298.15$\,K,
+$P_0 = 101.325$\,kPa (ASHRAE standard, confirmed with supervisor). Because
+the three cycles circulate very different mass flows per unit of output,
+component destruction is reported both per kilogram of working fluid and
+per kilojoule of net work; only the latter is a like-for-like basis.
+
+Specific flow exergy:
+\begin{equation}
+ex = (h - h_0) - T_0(s - s_0)
+\label{eq:flow_exergy}
+\end{equation}
+For adiabatic turbomachinery:
+\begin{equation}
+\dot{E}_{x,dest} = T_0\,\dot{m}(s_{out} - s_{in})
+\label{eq:adiabatic_exdest}
+\end{equation}
+For heat exchangers receiving heat from source at $T_{source}$:
+\begin{align}
+ex_{heat,in} &= Q_{in}\!\left(1 - \frac{T_0}{T_{source}}\right) \label{eq:exergy_heat}\\
+\dot{E}_{x,dest,HX} &= ex_{heat,in} - (ex_{out} - ex_{in}) \label{eq:hx_exdest}
+\end{align}
+For condensers rejecting heat to environment:
+\begin{equation}
+\dot{E}_{x,dest,cond} = ex_{in} - ex_{out}
+\label{eq:cond_exdest}
+\end{equation}
+Global balance closure check:
+\begin{equation}
+\dot{W}_{net} + \dot{E}_{x,dest,total} = ex_{heat,in}
+\label{eq:exergy_balance}
+\end{equation}
+
+\section{Sensitivity Analysis (RQ1)}
+\label{sec:method_sensitivity}
+
+\subsection{Recuperator Effectiveness Sweep}
+
+The tCO$_2$ cycle is evaluated at four recuperator effectiveness values
+($\varepsilon = 0, 0.50, 0.70, 0.85$) at each of the three site design
+points, with all other parameters held at baseline. For each $\varepsilon$
+value the heater integration of Section~\ref{sec:method_pinch} is repeated to
+determine how recuperation raises the heater inlet temperature and therefore
+the lowest temperature to which the waste gas can be cooled. The quantity of
+interest for waste heat recovery is not efficiency alone but the net work
+obtained per kilogram of waste gas, $w_{gas} = \eta_{th}\,c_{p,gas}\,
+(T_{src} - T_{gas,out})$, which combines both effects.
+
+\subsection{Low-Side Pressure Sweep}
+
+The tCO$_2$ cycle is evaluated at $P_{low} = 3.5, 4.0, 5.0, 6.0$ and
+$7.0$\,MPa with $\varepsilon = 0.70$ fixed, at each site design point.
+Condensing temperature, $\eta_{th}$, BWR, achievable gas outlet temperature
+and $w_{gas}$ are recorded. The feasibility of each $P_{low}$ value is assessed
+against the cooling-water temperatures available at the three Australian
+sites, and the parasitic load of mechanical chilling, where it would be
+required, is estimated from the condenser duty and a chiller coefficient of
+performance of 4--6.
+

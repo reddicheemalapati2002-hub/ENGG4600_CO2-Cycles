@@ -1,0 +1,316 @@
+%% ============================================================
+%% CHAPTER 5 — RQ2: SIZING AND CAPITAL COST
+%% ============================================================
+\chapter{Equipment Sizing and Capital Cost (RQ2)}
+\label{ch:results_rq2}
+
+This chapter answers RQ2 in four steps. Section~\ref{sec:rq2_sitedesign}
+establishes the design point of each cycle at each site, including the
+pinch-limited steam pressure and the power each cycle can recover from the
+stream. Section~\ref{sec:rq2_sp_vfr} compares turbine compactness,
+Section~\ref{sec:rq2_hx_sizing} compares heat exchanger sizing methods, and
+Section~\ref{sec:rq2_capital} reports capital cost versus plant size and its
+breakdown by component.
+
+\section{Site Design Points}
+\label{sec:rq2_sitedesign}
+
+Table~\ref{tab:sitedesign} gives the design point of every cycle at every
+site after integration with the waste-gas stream
+(Section~\ref{sec:method_sitedesign}). Two numbers in each row matter more
+than the efficiency: the gas outlet temperature, which fixes how much of the
+stream is used, and $w_{gas}$, the net work obtained per kilogram of gas.
+
+\begin{table}[H]
+\centering
+\caption{Site design points (turbine inlet $T_{src}-10$\,K, 10\,K heater
+approach). $T^{*}$ is the saturation temperature of the steam boiler (s), the
+sCO$_2$ compressor inlet temperature (i) or the tCO$_2$ condensing
+temperature (c). $w_{gas}$ is the net work per kilogram of waste gas and
+$\dot{W}_{site}$ the net output from the whole stream of
+Table~\ref{tab:casestudies}.}
+\label{tab:sitedesign}
+\renewcommand{\arraystretch}{1.25}
+\footnotesize
+\begin{tabular}{@{}l l r r r r r r r r@{}}
+\toprule
+\rowcolor{tableheader}
+\textbf{Site} & \textbf{Cycle} & $P_{high}$ & $T^{*}$ & $\eta_{th}$ & BWR & Heater in & Gas out & $w_{gas}$ & $\dot{W}_{site}$ \\
+\rowcolor{tableheader}
+ & & (MPa) & (\textdegree C) & (\%) & (\%) & (\textdegree C) & (\textdegree C) & (kJ/kg) & (kW) \\
+\midrule
+\rowcolor{rowgray} CS2 & SRC     & 0.16 & 113.1\,s & 14.44 & 0.0  & 45.8  & 113.6 & 13.7 & 412 \\
+                   CS2 & sCO$_2$ & 20.0 & 36.0\,i  & 11.43 & 64.4 & 100.0 & 110.0 & 11.3 & 340 \\
+\rowcolor{rowgray} CS2 & tCO$_2$ & 12.8 & 14.3\,c  & 15.67 & 20.7 & 50.2  & 60.2  & 24.1 & \textbf{723} \\
+\midrule
+                   CS1 & SRC     & 0.91 & 175.9\,s & 23.67 & 0.2  & 45.9  & 147.2 & 52.8 & 2639 \\
+\rowcolor{rowgray} CS1 & sCO$_2$ & 20.0 & 36.0\,i  & 22.24 & 41.0 & 177.5 & 187.5 & 39.8 & 1988 \\
+                   CS1 & tCO$_2$ & 20.0 & 14.3\,c  & 24.97 & 19.0 & 91.1  & 101.1 & 68.4 & \textbf{3418} \\
+\midrule
+\rowcolor{rowgray} CS3 & SRC     & 3.69 & 245.7\,s & 30.82 & 0.5  & 46.2  & 164.7 & 113.7 & \textbf{2273} \\
+                   CS3 & sCO$_2$ & 20.0 & 36.0\,i  & 27.58 & 31.3 & 279.0 & 289.1 & 64.0 & 1280 \\
+\rowcolor{rowgray} CS3 & tCO$_2$ & 20.0 & 14.3\,c  & 28.49 & 14.4 & 141.1 & 151.1 & 109.3 & 2186 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{findingbox}
+\textbf{Finding 14 --- Integrated with a real stream, the steam cycle must run
+at a far lower pressure than the parametric sweep suggests.}
+The boiler pinch at the start of evaporation limits the optimum pressure to
+\keyresult{0.16, 0.91 and 3.69\,MPa} at the 200, 350 and 500\,\textdegree C
+sites (saturation 113, 176 and 246\,\textdegree C), giving site efficiencies
+of 14.4, 23.7 and 30.8\,\% against 24.5, 32.1 and 34.1\,\% in the sweep. A
+higher pressure raises efficiency but forces the gas to leave hotter, and the
+product $\eta_{th}(T_{src}-T_{gas,out})$ peaks at these values. Any
+comparison that evaluates steam at 10\,MPa against a 200--350\,\textdegree C
+exhaust stream overstates it badly.
+\end{findingbox}
+
+\begin{findingbox}
+\textbf{Finding 15 --- On a fixed-source basis the tCO$_2$ cycle recovers the
+most power at 200 and 350\,\textdegree C, and the sCO$_2$ cycle the least at
+every site.}
+From the CS2 stream tCO$_2$ delivers \keyresult{723\,kW against 412\,kW for
+steam and 340\,kW for sCO$_2$}; from CS1, 3418 against 2639 and 1988\,kW;
+from CS3, 2186 against 2273 and 1280\,kW. The ranking follows the gas outlet
+temperature, not the efficiency: tCO$_2$ cools the gas to 60--151\,\textdegree C
+because its heater inlet is the recuperator outlet at 50--141\,\textdegree C;
+steam cools it to 114--165\,\textdegree C, limited by the evaporator pinch;
+the recuperated sCO$_2$ cycle cools it only to 110--289\,\textdegree C because
+its heater inlet is 100--279\,\textdegree C. At CS3 the sCO$_2$ cycle uses
+only 63\,\% of the heat that steam uses. The sCO$_2$ recuperator at CS2 also
+reaches an internal temperature difference of 2.7\,K, below the 10\,K design
+approach, so that design point is not practically realisable without a lower
+effectiveness.
+\end{findingbox}
+
+\section{Turbine Compactness: Size Parameter and Volumetric Flow Ratio}
+\label{sec:rq2_sp_vfr}
+
+Figure~\ref{fig:sp_vfr} and Table~\ref{tab:sp_vfr} compare turbine size
+parameter and volumetric flow ratio at the site design points.
+
+\begin{figure}[H]
+\centering
+\thesisfig{RQ2_TURBINE_SP_VFR.png}{1.0}{8cm}
+\caption{Turbine size parameter (left) and volumetric flow ratio (right, log
+scale) at the site design points. VFR $< 5$ permits a single-stage radial
+turbine.}
+\label{fig:sp_vfr}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\caption{Turbine size parameter (per kg/s) and volumetric flow ratio at the site
+design points.}
+\label{tab:sp_vfr}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{3.6cm}
+  >{\centering\arraybackslash}X >{\centering\arraybackslash}X >{\centering\arraybackslash}X}
+\toprule
+\rowcolor{tableheader}
+\textbf{Parameter} & \textbf{CS2 (200\,\textdegree C)} & \textbf{CS1 (350\,\textdegree C)} & \textbf{CS3 (500\,\textdegree C)} \\
+\midrule
+\rowcolor{rowgray}
+SP, SRC (m$\cdot$(kJ/kg)$^{-0.25}$)     & 0.810 & 0.694 & 0.632 \\
+SP, sCO$_2$                              & 0.031 & 0.035 & 0.038 \\
+\rowcolor{rowgray}
+SP, tCO$_2$                              & 0.040 & 0.039 & 0.042 \\
+SP ratio SRC/sCO$_2$, SRC/tCO$_2$        & 26, 20 & 20, 18 & 17, 15 \\
+\midrule
+\rowcolor{rowgray}
+VFR, SRC                                 & 10.5 & 45.2 & 148 \\
+VFR, sCO$_2$                             & 2.01 & 2.08 & 2.11 \\
+\rowcolor{rowgray}
+VFR, tCO$_2$                             & 2.14 & 3.08 & 3.13 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{findingbox}
+\textbf{Finding 16 --- CO$_2$ turbines are 15--26 times more compact than the
+steam turbine at the same site.}
+The size parameter of the steam turbine is 0.63--0.81\,m$\cdot$(kJ/kg)$^{-0.25}$
+per kg/s against 0.031--0.042 for the CO$_2$ cycles; the ratio is largest at
+the lowest source temperature (\keyresult{26$\times$ at CS2}) because the
+low-pressure steam cycle there exhausts a very large specific volume. sCO$_2$
+is 11--29\,\% more compact than tCO$_2$, a gap that narrows with temperature.
+\end{findingbox}
+
+\begin{findingbox}
+\textbf{Finding 17 --- The steam turbine needs a multi-stage machine at
+350\,\textdegree C and above; both CO$_2$ cycles stay single-stage.}
+Steam VFR is 10.5, 45 and 148 at the three site pressures (lower than the
+89--807 of the 10\,MPa sweep because the site pressures are lower), all above
+the single-stage threshold of 5. CO$_2$ VFR is \keyresult{2.0--3.1} at every
+site. Compactness is the CO$_2$ cycles' most robust advantage; it survives
+every other correction made in this thesis.
+\end{findingbox}
+
+\section{Heat Exchanger Sizing: Segmented versus Two-Point LMTD}
+\label{sec:rq2_hx_sizing}
+
+Figure~\ref{fig:hx_ntu_lmtd} compares the tCO$_2$ heater area from the
+segmented integration (Eq.~\ref{eq:seg_UA}) with the two-point LMTD result at
+$\varepsilon = 0$, using $U = 380$\,W/m$^2$K.
+
+\begin{figure}[H]
+\centering
+\thesisfig{RQ2_HX_AREA_NTU_vs_LMTD.png}{1.0}{8cm}
+\caption{tCO$_2$ heater area at $\varepsilon = 0$: segmented 200-node
+integration versus two-point LMTD (left), and the percentage by which the
+two-point method overestimates the area (right).}
+\label{fig:hx_ntu_lmtd}
+\end{figure}
+
+\begin{findingbox}
+\textbf{Finding 18 --- Two-point LMTD overestimates the tCO$_2$ heater area by
+129--223\,\% when the pseudo-critical peak lies inside the heater.}
+Segmented areas are 41.5, 50.2 and 57.2\,m$^2$ per kg/s against 94.9, 136.2
+and 184.7\,m$^2$ from the two-point method (\keyresult{+129, +171 and
++223\,\%}). Because both terminals sit at the 10\,K approach
+(Finding~6), the two-point LMTD is exactly 10\,K, whereas the duty-weighted
+mean driving force is 22.9, 27.1 and 32.3\,K. The error grows with source
+temperature because the mid-exchanger bulge grows. A designer using the
+two-point method would price the tCO$_2$ heater at two to three times its
+true cost. At the design effectiveness of 0.70 the heater inlet lies above
+$T_{pc}$, the profile is nearly linear and the two methods agree to within
+a few per cent; the capital costs that follow use the segmented $UA$ in all
+cases.
+\end{findingbox}
+
+\section{Capital Cost Estimation}
+\label{sec:rq2_capital}
+
+Figure~\ref{fig:capital_cost} shows specific capital cost against plant size
+at each site's design conditions, and Figure~\ref{fig:cost_breakdown} and
+Table~\ref{tab:cost_breakdown} the breakdown at 1\,MWe. All three cycles are
+costed with the correlations of Table~\ref{tab:cost_basis}.
+
+\begin{figure}[H]
+\centering
+\thesisfig{RQ2_CAPITAL_COST_AUD_per_kW.png}{1.0}{7cm}
+\caption{Total erected cost per kilowatt (2026 AUD) versus net output at the
+three site design conditions.}
+\label{fig:capital_cost}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\caption{Specific capital cost (total erected, AUD/kW, 2026) versus net
+output.}
+\label{tab:capital}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{1.0cm}>{\raggedright\arraybackslash}p{1.3cm}
+  >{\centering\arraybackslash}X >{\centering\arraybackslash}X >{\centering\arraybackslash}X >{\centering\arraybackslash}X}
+\toprule
+\rowcolor{tableheader}
+\textbf{Site} & \textbf{Cycle} & \textbf{100\,kW} & \textbf{500\,kW} & \textbf{1\,MW} & \textbf{5\,MW} \\
+\midrule
+\rowcolor{rowgray} CS2 & SRC     & 9{,}900  & 5{,}587  & \textbf{4{,}444} & 2{,}698 \\
+                   CS2 & sCO$_2$ & 20{,}126 & 13{,}798 & 11{,}626 & 7{,}670 \\
+\rowcolor{rowgray} CS2 & tCO$_2$ & 10{,}308 & 6{,}838  & 5{,}757  & 3{,}899 \\
+\midrule
+                   CS1 & SRC     & 7{,}469  & 3{,}956  & \textbf{3{,}071} & 1{,}776 \\
+\rowcolor{rowgray} CS1 & sCO$_2$ & 11{,}953 & 8{,}226  & 6{,}971  & 4{,}676 \\
+                   CS1 & tCO$_2$ & 7{,}951  & 5{,}253  & 4{,}421  & 2{,}998 \\
+\midrule
+\rowcolor{rowgray} CS3 & SRC     & 6{,}630  & 3{,}394  & \textbf{2{,}598} & 1{,}459 \\
+                   CS3 & sCO$_2$ & 10{,}366 & 7{,}110  & 6{,}031  & 4{,}069 \\
+\rowcolor{rowgray} CS3 & tCO$_2$ & 7{,}728  & 5{,}098  & 4{,}286  & 2{,}897 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\thesisfig{RQ2_COST_BREAKDOWN.png}{1.0}{7cm}
+\caption{Capital cost breakdown at 1\,MWe net output (installed basis, 2026
+AUD).}
+\label{fig:cost_breakdown}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\caption{Equipment cost breakdown at 1\,MWe (kAUD, 2026, before the 35\,\%
+installation factor) and the turbine and compression shaft powers behind it.}
+\label{tab:cost_breakdown}
+\renewcommand{\arraystretch}{1.25}
+\footnotesize
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{0.9cm}>{\raggedright\arraybackslash}p{1.0cm}
+  >{\centering\arraybackslash}X >{\centering\arraybackslash}X >{\centering\arraybackslash}X >{\centering\arraybackslash}X
+  >{\centering\arraybackslash}X >{\centering\arraybackslash}X >{\centering\arraybackslash}p{1.2cm} >{\centering\arraybackslash}p{1.3cm}}
+\toprule
+\rowcolor{tableheader}
+\textbf{Site} & \textbf{Cycle} & Turbine & Pump/ comp. & Heater & Recup. & Cooler & Gen. & \textbf{Total} & Shaft kW (turb./comp.) \\
+\midrule
+\rowcolor{rowgray} CS2 & SRC     & 593  & 7    & 1037 & ---  & 1433 & 222 & 3292 & 1000 / 0 \\
+                   CS2 & sCO$_2$ & 1896 & 1250 & 2433 & 1059 & 1752 & 222 & 8612 & 2813 / 1813 \\
+\rowcolor{rowgray} CS2 & tCO$_2$ & 998  & 76   & 1280 & 356  & 1333 & 222 & 4265 & 1261 / 261 \\
+\midrule
+                   CS1 & SRC     & 593  & 7    & 544  & ---  & 908  & 222 & 2275 & 1002 / 2 \\
+\rowcolor{rowgray} CS1 & sCO$_2$ & 1264 & 619  & 1605 & 489  & 964  & 222 & 5164 & 1695 / 695 \\
+                   CS1 & tCO$_2$ & 981  & 70   & 960  & 181  & 861  & 222 & 3275 & 1234 / 234 \\
+\midrule
+\rowcolor{rowgray} CS3 & SRC     & 594  & 9    & 408  & ---  & 692  & 222 & 1924 & 1005 / 5 \\
+                   CS3 & sCO$_2$ & 1119 & 442  & 1542 & 363  & 778  & 222 & 4467 & 1456 / 456 \\
+\rowcolor{rowgray} CS3 & tCO$_2$ & 939  & 54   & 1073 & 135  & 752  & 222 & 3175 & 1169 / 169 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{findingbox}
+\textbf{Finding 19 --- At equal output the steam cycle is the cheapest to
+build at every site, tCO$_2$ costs 30--65\,\% more and sCO$_2$ two to three
+times more.}
+At 1\,MWe the total erected cost is \keyresult{AUD\,4{,}444, 3{,}071 and
+2{,}598/kW} for steam at CS2, CS1 and CS3; 5{,}757, 4{,}421 and 4{,}286/kW for
+tCO$_2$; and 11{,}626, 6{,}971 and 6{,}031/kW for sCO$_2$. Specific cost
+falls by 61--78\,\% between 100\,kW and 5\,MW, and the ordering is the same at
+every size. The Interim Report's result that sCO$_2$ was the cheapest cycle
+at 200 and 350\,\textdegree C arose from a sign error in its heater
+temperature difference that priced the sCO$_2$ heater at a few per cent of
+its true cost, and is withdrawn.
+\end{findingbox}
+
+\begin{findingbox}
+\textbf{Finding 20 --- The sCO$_2$ cost penalty is turbomachinery: a high
+back-work ratio means every kilowatt of net output needs several kilowatts
+of machinery.}
+At CS2 a 1\,MWe sCO$_2$ plant needs a \keyresult{2.8\,MW turbine and a
+1.8\,MW compressor}; turbomachinery is 37\,\% of its equipment cost against
+25\,\% for tCO$_2$ and 18\,\% for steam. The CO$_2$ turbine is also costed on
+a correlation (Weiland et al.) whose data begin at 8\,MW and which gives a
+higher unit cost than the steam benchmark at 1\,MW (USD\,594/kW against
+425/kW), reflecting the immaturity of small high-pressure CO$_2$ machines.
+\end{findingbox}
+
+\begin{findingbox}
+\textbf{Finding 21 --- Heat exchangers are 35--43\,\% of CO$_2$ equipment cost,
+and heat rejection is a large cost for every cycle at low source
+temperature.}
+The primary heater plus recuperator account for 35--43\,\% of CO$_2$
+equipment cost and 21--32\,\% of the steam cycle's. The condenser or cooler,
+omitted at the interim stage, is \keyresult{17--44\,\%} of equipment cost:
+largest for the 14\,\%-efficient steam cycle at CS2, which rejects six units
+of heat per unit of electricity, and smallest for the sCO$_2$ cycle at CS3.
+A low-grade WHR plant is, in capital terms, mostly heat exchangers.
+\end{findingbox}
+
+\section{Summary of RQ2 Results}
+\label{sec:rq2_summary}
+
+Integrating each cycle with the actual waste-gas stream changes the picture
+drawn by the parametric sweep. The steam cycle must run at 0.16--3.7\,MPa
+rather than 10\,MPa, which lowers its efficiency to 14--31\,\% but still
+leaves it the cheapest plant per kilowatt at every site, 30--65\,\% below
+tCO$_2$ and a factor of two to three below sCO$_2$. The tCO$_2$ cycle,
+however, recovers 29\,\% more power than steam from the 350\,\textdegree C
+stream and 75\,\% more from the 200\,\textdegree C stream, because its cold
+heater inlet lets it cool the gas further. The sCO$_2$ cycle is penalised
+twice: its hot recuperated heater inlet leaves most of the stream unused,
+and its back-work ratio makes its turbomachinery the most expensive of the
+three. The CO$_2$ cycles' compactness advantage (15--26$\times$ in size
+parameter) is unaffected by any of these corrections. Which of these effects
+dominates the economics is the subject of RQ3.

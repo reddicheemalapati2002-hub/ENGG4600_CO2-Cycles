@@ -1,0 +1,140 @@
+RQ1 — parametric sweep (thermal efficiency %, BWR %)
+  TIT     SRC    sCO2    tCO2 |    SRC   sCO2   tCO2
+  150   19.06    5.29   13.28 |   0.11  79.81  23.11
+  175   21.97    9.60   14.47 |   0.19  69.20  20.79
+  200   24.45   12.53   16.09 |   0.29  61.74  19.98
+  225   26.56   14.92   17.88 |   0.44  56.12  19.72
+  250   28.34   16.94   19.56 |   0.64  51.68  19.47
+  275   29.82   18.67   21.13 |   0.91  48.05  19.23
+  300   31.02   20.18   22.60 |   1.27  45.01  18.99
+  325   31.76   21.51   23.98 |   1.50  42.41  18.77
+  350   32.13   22.70   25.28 |   1.42  40.14  18.56
+  375   32.46   23.77   25.98 |   1.36  38.15  17.63
+  400   32.79   24.74   26.62 |   1.31  36.38  16.80
+  425   33.10   25.62   27.20 |   1.27  34.79  16.06
+  450   33.42   26.43   27.73 |   1.22  33.35  15.39
+  475   33.74   27.16   28.22 |   1.19  32.05  14.78
+  500   34.06   27.84   28.66 |   1.15  30.85  14.22
+  525   34.39   28.47   29.07 |   1.12  29.75  13.71
+  550   34.71   29.05   29.45 |   1.09  28.73  13.23
+  575   35.04   29.59   29.79 |   1.06  27.79  12.79
+  600   35.38   30.09   30.12 |   1.03  26.91  12.39
+
+RQ1 — exergy at TIT 400 C (kJ/kg wf | kJ per kJ net work)
+SRC   eta_th=32.79 eta_ex=58.85 total=  663.2 (0.699/kJ)  pump=2.3(0.002)  recuperator=0.0(0.000)  heater=375.4(0.396)  turbine=158.5(0.167)  cooler=126.8(0.134)  heater share=56.6%  closure=-2.3e-13
+sCO2  eta_th=24.74 eta_ex=44.41 total=   71.5 (1.252/kJ)  pump=5.4(0.094)  recuperator=20.0(0.351)  heater=17.5(0.306)  turbine=8.2(0.144)  cooler=20.4(0.357)  heater share=24.4%  closure=8.5e-14
+tCO2  eta_th=26.62 eta_ex=47.79 total=  117.7 (1.092/kJ)  pump=4.3(0.040)  recuperator=37.8(0.351)  heater=61.3(0.569)  turbine=12.9(0.120)  cooler=1.4(0.013)  heater share=52.1%  closure=-1.7e-13
+
+RQ1 — tCO2 heater pinch (eps=0)
+CS2: P_high=12.8 MPa pump exit 24.3 C, T_pc=57.1 C cp_peak=4.42, gas out 34.3 C, Q=360.5 kJ/kg, dT min 10.0 K [cold terminal; hot terminal], dT max 41.6 K at 88 C, LMTD_eff 22.9 K | eps=0.70: hx_in 50.2 C, gas out 60.2 C, LMTD_eff 23.2 K
+CS1: P_high=20.0 MPa pump exit 32.1 C, T_pc=76.2 C cp_peak=2.62, gas out 42.1 C, Q=517.3 kJ/kg, dT min 10.0 K [cold terminal; hot terminal], dT max 49.0 K at 145 C, LMTD_eff 27.1 K | eps=0.70: hx_in 91.1 C, gas out 101.1 C, LMTD_eff 21.3 K
+CS3: P_high=20.0 MPa pump exit 32.1 C, T_pc=75.8 C cp_peak=2.62, gas out 42.1 C, Q=701.3 kJ/kg, dT min 10.0 K [cold terminal; hot terminal], dT max 64.7 K at 166 C, LMTD_eff 32.3 K | eps=0.70: hx_in 141.1 C, gas out 151.1 C, LMTD_eff 16.1 K
+
+RQ1 — recuperator sensitivity (tCO2)
+CS2 eps=0.00 eta= 12.23 bwr=20.69 w_net= 44.10 q_in= 360.5 q_rec=   0.0 hx_in=  24.3 gas_out=  34.3 w_gas= 22.30 rec_dTmin=nan UA_rec=0
+CS2 eps=0.50 eta= 14.51 bwr=20.69 w_net= 44.10 q_in= 304.0 q_rec=  56.5 hx_in=  44.1 gas_out=  54.1 w_gas= 23.28 rec_dTmin=38.5 UA_rec=1118
+CS2 eps=0.70 eta= 15.67 bwr=20.69 w_net= 44.10 q_in= 281.4 q_rec=  79.1 hx_in=  50.2 gas_out=  60.2 w_gas= 24.10 rec_dTmin=21.3 UA_rec=2227
+CS2 eps=0.85 eta= 16.68 bwr=20.69 w_net= 44.10 q_in= 264.5 q_rec=  96.0 hx_in=  54.2 gas_out=  64.2 w_gas= 24.91 rec_dTmin=9.8 UA_rec=4147
+CS1 eps=0.00 eta= 17.97 bwr=18.97 w_net= 92.95 q_in= 517.3 q_rec=   0.0 hx_in=  32.1 gas_out=  42.1 w_gas= 60.85 rec_dTmin=nan UA_rec=0
+CS1 eps=0.50 eta= 22.47 bwr=18.97 w_net= 92.95 q_in= 413.7 q_rec= 103.6 hx_in=  75.0 gas_out=  85.0 w_gas= 65.49 rec_dTmin=83.1 UA_rec=974
+CS1 eps=0.70 eta= 24.97 bwr=18.97 w_net= 92.95 q_in= 372.3 q_rec= 145.1 hx_in=  91.1 gas_out= 101.1 w_gas= 68.36 rec_dTmin=46.7 UA_rec=1918
+CS1 eps=0.85 eta= 27.25 bwr=18.97 w_net= 92.95 q_in= 341.2 q_rec= 176.2 hx_in= 104.2 gas_out= 114.2 w_gas= 70.68 rec_dTmin=21.6 UA_rec=3528
+CS3 eps=0.00 eta= 18.39 bwr=14.44 w_net=128.95 q_in= 701.3 q_rec=   0.0 hx_in=  32.1 gas_out=  42.1 w_gas= 92.60 rec_dTmin=nan UA_rec=0
+CS3 eps=0.50 eta= 24.62 bwr=14.44 w_net=128.95 q_in= 523.7 q_rec= 177.6 hx_in= 104.8 gas_out= 114.8 w_gas=104.33 rec_dTmin=151.2 UA_rec=923
+CS3 eps=0.70 eta= 28.49 bwr=14.44 w_net=128.95 q_in= 452.7 q_rec= 248.7 hx_in= 141.1 gas_out= 151.1 w_gas=109.32 rec_dTmin=85.8 UA_rec=1792
+CS3 eps=0.85 eta= 32.29 bwr=14.44 w_net=128.95 q_in= 399.4 q_rec= 302.0 hx_in= 174.7 gas_out= 184.7 w_gas=111.99 rec_dTmin=39.3 UA_rec=3260
+
+RQ1 — P_low sensitivity (tCO2, eps=0.70)
+CS2 P_low=3.5 T_cond= 0.16 eta= 18.47 bwr=16.72 w_net= 61.55 gas_out=  44.7 w_gas= 31.56
+CS2 P_low=4.0 T_cond= 5.30 eta= 17.49 bwr=17.98 w_net= 55.13 gas_out=  50.7 w_gas= 28.72
+CS2 P_low=5.0 T_cond=14.28 eta= 15.67 bwr=20.69 w_net= 44.10 gas_out=  60.2 w_gas= 24.10
+CS2 P_low=6.0 T_cond=21.98 eta= 13.99 bwr=23.93 w_net= 34.77 gas_out=  67.8 w_gas= 20.33
+CS2 P_low=7.0 T_cond=28.68 eta= 12.36 bwr=28.88 w_net= 26.34 gas_out=  76.5 w_gas= 16.80
+CS1 P_low=3.5 T_cond= 0.16 eta= 27.59 bwr=15.59 w_net=117.48 gas_out=  80.4 w_gas= 81.82
+CS1 P_low=4.0 T_cond= 5.30 eta= 26.67 bwr=16.68 w_net=108.51 gas_out=  87.6 w_gas= 76.96
+CS1 P_low=5.0 T_cond=14.28 eta= 24.97 bwr=18.97 w_net= 92.95 gas_out= 101.1 w_gas= 68.36
+CS1 P_low=6.0 T_cond=21.98 eta= 23.41 bwr=21.64 w_net= 79.54 gas_out= 114.8 w_gas= 60.57
+CS1 P_low=7.0 T_cond=28.68 eta= 21.91 bwr=25.55 w_net= 66.97 gas_out= 131.0 w_gas= 52.79
+CS3 P_low=3.5 T_cond= 0.16 eta= 31.56 bwr=11.84 w_net=161.54 gas_out= 120.2 w_gas=131.86
+CS3 P_low=4.0 T_cond= 5.30 eta= 30.48 bwr=12.68 w_net=149.61 gas_out= 130.4 w_gas=123.92
+CS3 P_low=5.0 T_cond=14.28 eta= 28.49 bwr=14.44 w_net=128.95 gas_out= 151.1 w_gas=109.32
+CS3 P_low=6.0 T_cond=21.98 eta= 26.67 bwr=16.49 w_net=111.24 gas_out= 172.9 w_gas= 95.93
+CS3 P_low=7.0 T_cond=28.68 eta= 24.95 bwr=19.49 w_net= 94.94 gas_out= 197.7 w_gas= 82.97
+
+RQ1 — exergy at site design points (per kJ net work)
+CS2 SRC   eta_th=14.44 eta_ex=39.03 total/kJ=1.562 pump=0.000 recuperator=0.000 heater=1.010 turbine=0.165 cooler=0.387
+CS2 sCO2  eta_th=11.43 eta_ex=30.91 total/kJ=2.235 pump=0.298 recuperator=0.016 heater=0.807 turbine=0.390 cooler=0.724
+CS2 tCO2  eta_th=15.67 eta_ex=42.38 total/kJ=1.360 pump=0.052 recuperator=0.187 heater=1.085 turbine=0.175 cooler=-0.140
+CS1 SRC   eta_th=23.67 eta_ex=45.38 total/kJ=1.204 pump=0.000 recuperator=0.000 heater=0.828 turbine=0.165 cooler=0.210
+CS1 sCO2  eta_th=22.24 eta_ex=42.65 total/kJ=1.345 pump=0.114 recuperator=0.272 heater=0.400 turbine=0.172 cooler=0.386
+CS1 tCO2  eta_th=24.97 eta_ex=47.88 total/kJ=1.089 pump=0.046 recuperator=0.265 heater=0.658 turbine=0.137 cooler=-0.017
+CS3 SRC   eta_th=30.82 eta_ex=50.16 total/kJ=0.994 pump=0.001 recuperator=0.000 heater=0.681 turbine=0.166 cooler=0.146
+CS3 sCO2  eta_th=27.58 eta_ex=44.89 total/kJ=1.228 pump=0.075 recuperator=0.440 heater=0.261 turbine=0.117 cooler=0.335
+CS3 tCO2  eta_th=28.49 eta_ex=46.37 total/kJ=1.157 pump=0.033 recuperator=0.463 heater=0.504 turbine=0.101 cooler=0.055
+
+RQ1 — indicative chiller parasitic for tCO2 condensing at 14.3 C (fraction of net work)
+CS2: {'COP4': 1.345, 'COP6': 0.897, 'q_out': 237.302, 'w_net': 44.105}
+CS1: {'COP4': 0.751, 'COP6': 0.501, 'q_out': 279.297, 'w_net': 92.954}
+CS3: {'COP4': 0.628, 'COP6': 0.418, 'q_out': 323.705, 'w_net': 128.954}
+
+RQ1 — sCO2 compressor inlet sensitivity (eta % at 200/350/500/600 C): {32: [15.74, 23.64, 27.95, 29.92], 36: [12.5, 22.69, 27.84, 30.09], 40: [9.15, 21.27, 27.11, 29.61]}
+
+RQ2 — site design points
+CS2 SRC   P_hi= 0.16 TIT=190 eta=14.44 bwr=  0.0 w_net= 384.1 hx_in=  45.8 gas_out= 113.6 w_gas= 13.73 W_site=    412 kW Q_rec=   2853 kW m_wf=  1.07 UA_h=  79902 UA_r=     0 UA_c= 227661 LMTD_h= 33.3 rec_dTmin=nan Tsat=113.11622697759839 Tcond=45.8 pinch=interior at T_wf = 113–113 °C; hot terminal
+CS2 sCO2  P_hi=20.00 TIT=190 eta=11.43 bwr= 64.4 w_net=  18.0 hx_in= 100.0 gas_out= 110.0 w_gas= 11.32 W_site=    340 kW Q_rec=   2970 kW m_wf= 18.85 UA_h=  11608 UA_r=  3854 UA_c=  13959 LMTD_h= 13.6 rec_dTmin=2.7 Tsat=None Tcond=36.0 pinch=cold terminal; hot terminal
+CS2 tCO2  P_hi=12.80 TIT=190 eta=15.67 bwr= 20.7 w_net=  44.1 hx_in=  50.2 gas_out=  60.2 w_gas= 24.10 W_site=    723 kW Q_rec=   4614 kW m_wf= 16.40 UA_h=  12121 UA_r=  2227 UA_c=  23730 LMTD_h= 23.2 rec_dTmin=21.3 Tsat=None Tcond=14.3 pinch=cold terminal; hot terminal
+CS1 SRC   P_hi= 0.91 TIT=340 eta=23.67 bwr=  0.2 w_net= 697.1 hx_in=  45.9 gas_out= 147.2 w_gas= 52.79 W_site=   2639 kW Q_rec=  11153 kW m_wf=  3.79 UA_h=  61670 UA_r=     0 UA_c= 224869 LMTD_h= 47.8 rec_dTmin=nan Tsat=175.93483570198458 Tcond=45.8 pinch=interior at T_wf = 175–176 °C; hot terminal
+CS1 sCO2  P_hi=20.00 TIT=340 eta=22.24 bwr= 41.0 w_net=  47.0 hx_in= 177.5 gas_out= 187.5 w_gas= 39.76 W_site=   1988 kW Q_rec=   8937 kW m_wf= 42.31 UA_h=  17437 UA_r=  3607 UA_c=  16422 LMTD_h= 12.1 rec_dTmin=21.4 Tsat=None Tcond=36.0 pinch=cold terminal; hot terminal
+CS1 tCO2  P_hi=20.00 TIT=340 eta=24.97 bwr= 19.0 w_net=  93.0 hx_in=  91.1 gas_out= 101.1 w_gas= 68.36 W_site=   3418 kW Q_rec=  13689 kW m_wf= 36.77 UA_h=  17443 UA_r=  1918 UA_c=  27930 LMTD_h= 21.3 rec_dTmin=46.7 Tsat=None Tcond=14.3 pinch=cold terminal; hot terminal
+CS3 SRC   P_hi= 3.69 TIT=490 eta=30.82 bwr=  0.5 w_net= 995.4 hx_in=  46.2 gas_out= 164.7 w_gas=113.66 W_site=   2273 kW Q_rec=   7376 kW m_wf=  2.28 UA_h=  60048 UA_r=     0 UA_c= 223481 LMTD_h= 53.8 rec_dTmin=nan Tsat=245.69247229753444 Tcond=45.8 pinch=interior at T_wf = 244–246 °C; hot terminal
+CS3 sCO2  P_hi=20.00 TIT=490 eta=27.58 bwr= 31.3 w_net=  71.6 hx_in= 279.0 gas_out= 289.1 w_gas= 63.99 W_site=   1280 kW Q_rec=   4641 kW m_wf= 17.86 UA_h=  25217 UA_r=  3704 UA_c=  18813 LMTD_h= 10.3 rec_dTmin=40.6 Tsat=None Tcond=36.0 pinch=cold terminal; hot terminal
+CS3 tCO2  P_hi=20.00 TIT=490 eta=28.49 bwr= 14.4 w_net= 129.0 hx_in= 141.1 gas_out= 151.1 w_gas=109.32 W_site=   2186 kW Q_rec=   7675 kW m_wf= 16.96 UA_h=  28045 UA_r=  1792 UA_c=  32371 LMTD_h= 16.1 rec_dTmin=85.8 Tsat=None Tcond=14.3 pinch=cold terminal; hot terminal
+
+RQ2 — SP / VFR
+CS2: SRC SP=0.8103 VFR=10.48  sCO2 SP=0.0311 VFR=2.01  tCO2 SP=0.0400 VFR=2.14
+CS1: SRC SP=0.6937 VFR=45.25  sCO2 SP=0.0350 VFR=2.08  tCO2 SP=0.0389 VFR=3.08
+CS3: SRC SP=0.6321 VFR=148.25  sCO2 SP=0.0375 VFR=2.11  tCO2 SP=0.0417 VFR=3.13
+
+RQ2 — LMTD vs segmented (tCO2 heater, eps=0)
+CS2: A_seg=41.5 A_2pt=94.9 over=129.0% LMTD_eff=22.9 LMTD_2pt=10.0
+CS1: A_seg=50.2 A_2pt=136.2 over=171.2% LMTD_eff=27.1 LMTD_2pt=10.0
+CS3: A_seg=57.2 A_2pt=184.7 over=223.1% LMTD_eff=32.3 LMTD_2pt=10.0
+
+RQ2 — capital cost TEC AUD/kW (100 kW / 500 kW / 1 MW / 5 MW) and 1 MW breakdown kAUD (equipment, before +35%)
+CS2 SRC      9900    5587    4444    2698   1MW items: turbine=593 pump_comp=7 heater=1037 recuperator=0 cooler=1433 generator=222  HXshare=32%
+CS2 sCO2    20126   13798   11626    7670   1MW items: turbine=1896 pump_comp=1250 heater=2433 recuperator=1059 cooler=1752 generator=222  HXshare=41%
+CS2 tCO2    10308    6838    5757    3899   1MW items: turbine=998 pump_comp=76 heater=1280 recuperator=356 cooler=1333 generator=222  HXshare=38%
+CS1 SRC      7469    3956    3071    1776   1MW items: turbine=593 pump_comp=7 heater=544 recuperator=0 cooler=908 generator=222  HXshare=24%
+CS1 sCO2    11953    8226    6971    4676   1MW items: turbine=1264 pump_comp=619 heater=1605 recuperator=489 cooler=964 generator=222  HXshare=41%
+CS1 tCO2     7951    5253    4421    2998   1MW items: turbine=981 pump_comp=70 heater=960 recuperator=181 cooler=861 generator=222  HXshare=35%
+CS3 SRC      6630    3394    2598    1459   1MW items: turbine=594 pump_comp=9 heater=408 recuperator=0 cooler=692 generator=222  HXshare=21%
+CS3 sCO2    10366    7110    6031    4069   1MW items: turbine=1119 pump_comp=442 heater=1542 recuperator=363 cooler=778 generator=222  HXshare=43%
+CS3 tCO2     7728    5098    4286    2897   1MW items: turbine=939 pump_comp=54 heater=1073 recuperator=135 cooler=752 generator=222  HXshare=38%
+
+RQ3 — fixed-source economics
+CS2 SRC   W=    412 kW TEC=    2457 kAUD (  5967/kW) E=   3066 MWh LCOE=  95.7 NPV=    1115 kAUD PB_disc= 10.6 PB_simple=  7.3 IRR= 12.4% | MC P= 72.2% NPV P10/50/90=-723/691/2386 LCOE P10/50/90=77/104/140 | HX cut to match best: 0%
+CS2 sCO2  W=    340 kW TEC=    5144 kAUD ( 15146/kW) E=   2529 MWh LCOE= 242.9 NPV=   -3023 kAUD PB_disc=  inf PB_simple= 25.7 IRR= -2.3% | MC P=  0.5% NPV P10/50/90=-5191/-3310/-1423 LCOE P10/50/90=194/265/355 | HX cut to match best: n/a
+CS2 tCO2  W=    723 kW TEC=    4511 kAUD (  6238/kW) E=   5385 MWh LCOE= 100.0 NPV=    1710 kAUD PB_disc= 11.4 PB_simple=  7.7 IRR= 11.6% | MC P= 67.7% NPV P10/50/90=-1541/966/3957 LCOE P10/50/90=80/109/146 | HX cut to match best: 11%
+   best LCOE: SRC  best NPV: tCO2
+CS1 SRC   W=   2639 kW TEC=    5790 kAUD (  2194/kW) E=  19653 MWh LCOE=  35.2 NPV=   11415 kAUD PB_disc=  4.2 PB_simple=  3.6 IRR= 27.8% | MC P= 99.8% NPV P10/50/90=3800/9488/16555 LCOE P10/50/90=28/38/51 | HX cut to match best: 0%
+CS1 sCO2  W=   1988 kW TEC=   11715 kAUD (  5894/kW) E=  14801 MWh LCOE=  94.5 NPV=    -706 kAUD PB_disc=  inf PB_simple= 11.3 IRR=  6.2% | MC P= 32.9% NPV P10/50/90=-7480/-2028/3987 LCOE P10/50/90=76/103/138 | HX cut to match best: n/a
+CS1 tCO2  W=   3418 kW TEC=   11214 kAUD (  3281/kW) E=  25452 MWh LCOE=  52.6 NPV=   10083 kAUD PB_disc=  7.3 PB_simple=  5.6 IRR= 17.2% | MC P= 89.7% NPV P10/50/90=-81/7623/17108 LCOE P10/50/90=42/57/77 | HX cut to match best: 95%
+   best LCOE: SRC  best NPV: SRC
+CS3 SRC   W=   2273 kW TEC=    4368 kAUD (  1922/kW) E=  16926 MWh LCOE=  30.8 NPV=   12406 kAUD PB_disc=  3.2 PB_simple=  2.8 IRR= 36.2% | MC P=100.0% NPV P10/50/90=5208/10568/17247 LCOE P10/50/90=25/34/45 | HX cut to match best: 0%
+CS3 sCO2  W=   1280 kW TEC=    7274 kAUD (  5684/kW) E=   9529 MWh LCOE=  91.1 NPV=     895 kAUD PB_disc= 16.0 PB_simple=  9.4 IRR=  8.5% | MC P= 48.8% NPV P10/50/90=-3745/-87/4079 LCOE P10/50/90=73/99/133 | HX cut to match best: n/a
+CS3 tCO2  W=   2186 kW TEC=    7733 kAUD (  3537/kW) E=  16281 MWh LCOE=  56.7 NPV=    7467 kAUD PB_disc=  7.0 PB_simple=  5.4 IRR= 17.9% | MC P= 91.3% NPV P10/50/90=261/5699/12434 LCOE P10/50/90=45/62/83 | HX cut to match best: n/a
+   best LCOE: SRC  best NPV: SRC
+
+RQ4 — part load (eta % at 100/80/60/40/20 % load; retention)
+CS2 SRC   eta= 14.44  13.24  11.49   9.09   5.55  ret=1.000 0.917 0.796 0.629 0.384
+CS2 sCO2  eta= 11.43  11.50  10.33   8.00   4.68  ret=1.000 1.006 0.904 0.700 0.410
+CS2 tCO2  eta= 15.67  14.70  13.18  11.17   8.75  ret=1.000 0.938 0.841 0.713 0.558
+CS1 SRC   eta= 23.67  22.49  20.55  17.76  13.76  ret=1.000 0.950 0.868 0.751 0.582
+CS1 sCO2  eta= 22.24  21.09  18.66  14.99  10.13  ret=1.000 0.948 0.839 0.674 0.455
+CS1 tCO2  eta= 24.97  23.95  22.21  19.79  16.73  ret=1.000 0.959 0.889 0.792 0.670
+CS3 SRC   eta= 30.82  29.68  27.63  24.59  20.21  ret=1.000 0.963 0.897 0.798 0.656
+CS3 sCO2  eta= 27.58  25.89  22.91  18.61  12.99  ret=1.000 0.939 0.831 0.675 0.471
+CS3 tCO2  eta= 28.49  27.21  25.18  22.42  18.97  ret=1.000 0.955 0.884 0.787 0.666
+Marchionni SRC: turndown=0.70 r60=0.854 r40=0.726 startup=0.55 TOTAL=0.730
+Marchionni sCO2: turndown=0.55 r60=0.858 r40=0.683 startup=0.75 TOTAL=0.706
+Marchionni tCO2: turndown=0.70 r60=0.871 r40=0.764 startup=0.80 TOTAL=0.782

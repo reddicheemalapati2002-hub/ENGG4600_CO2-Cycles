@@ -1,0 +1,147 @@
+%% ============================================================
+%% CHAPTER 9 — CONCLUSIONS
+%% ============================================================
+\chapter{Conclusions and Recommendations}
+\label{ch:conclusions}
+
+\section{Answers to the Research Questions}
+\label{sec:answers}
+
+\subsection{RQ1: Thermodynamic Performance}
+
+Under consistent assumptions --- equal turbomachinery efficiencies, a
+recuperator limited by both streams, and a 36\,\textdegree C sCO$_2$
+compressor inlet consistent with Australian cooling water --- the steam
+Rankine cycle has the highest thermal efficiency at every turbine inlet
+temperature from 150 to 600\,\textdegree C (19.1--35.4\,\%), followed by
+tCO$_2$ (13.3--30.1\,\%) and sCO$_2$ (5.3--30.1\,\%); the sCO$_2$ cycle is
+unviable below 300\,\textdegree C because its compressor absorbs 45--80\,\%
+of turbine work. Per unit of net work steam is also the most
+exergy-efficient cycle at a common turbine inlet temperature; at realistic
+pinch-limited boiler pressures tCO$_2$ leads at 200 and 350\,\textdegree C.
+The tCO$_2$ heater is pinched at both terminals with the driving force
+widest in the middle, so the pseudo-critical $c_p$ peak enlarges the mean
+temperature difference rather than restricting it. Recuperation raises
+efficiency by 3--10 points at $\varepsilon = 0.70$ but raises the gas outlet
+temperature with it, so it adds only 8--18\,\% to the work recovered per
+kilogram of gas. The tCO$_2$ baseline needs a 14\,\textdegree C condenser
+that a chiller could supply only by consuming 63--134\,\% of the net
+output, and the sCO$_2$ cycle loses two-fifths of its 200\,\textdegree C
+efficiency if its compressor inlet warms from 32 to 40\,\textdegree C.
+
+\subsection{RQ2: Equipment Sizing and Capital Cost}
+
+CO$_2$ turbines are 15--26 times more compact than the steam turbine at the
+same site and remain single-stage (VFR 2.0--3.1) where steam needs
+multi-stage machines above 350\,\textdegree C; this advantage is robust.
+Integrated with the site stream, the steam boiler must run at 0.16, 0.91 and
+3.69\,MPa, and the tCO$_2$ cycle recovers the most power at 200 and
+350\,\textdegree C (723 and 3418\,kW against 412 and 2639\,kW for steam)
+because its cold heater inlet cools the gas furthest; sCO$_2$ recovers the
+least at every site. At equal output steam is the cheapest plant at every
+site (AUD\,4{,}444, 3{,}071 and 2{,}598/kW at 1\,MWe), tCO$_2$ costs 30--65\,\%
+more and sCO$_2$ two to three times more, the latter because its back-work
+ratio requires 2.8\,MW of turbine and 1.8\,MW of compressor per megawatt
+delivered at 200\,\textdegree C. Two-point LMTD sizing overestimates the
+tCO$_2$ heater area by 129--223\,\% when the $c_p$ peak lies inside it.
+
+\subsection{RQ3: Australian Techno-Economic Analysis}
+
+On a fixed-source basis the steam cycle gives the lowest LCOE at all three
+sites (AUD\,96, 35 and 31/MWh) and the highest NPV at 350 and
+500\,\textdegree C (AUD\,11.4\,M and 12.4\,M, discounted payback 4.2 and
+3.2 years, IRR 28 and 36\,\%, 99.8--100\,\% Monte Carlo viability). The
+tCO$_2$ cycle is the better investment at 200\,\textdegree C (NPV 1.71\,M
+against 1.12\,M) because it recovers 75\,\% more power, but only where a
+natural cold sink exists; both options there are marginal (payback 10--11
+years, 68--72\,\% viability). The sCO$_2$ cycle is not viable at any site
+(NPV negative at CS2 and CS1; 0.5--49\,\% viability). Cheaper heat exchangers
+would bring tCO$_2$ level with steam at 200\,\textdegree C with an 11\,\%
+reduction, but not at 350 or 500\,\textdegree C, and would not rescue sCO$_2$
+anywhere.
+
+\subsection{RQ4: Off-Design Performance}
+
+The tCO$_2$ cycle is the most flexible (Marchionni score 0.78; 56--67\,\%
+efficiency retention at 20\,\% load), steam second (0.73; 38--66\,\%, worst
+at the low-pressure 200\,\textdegree C design) and sCO$_2$ third (0.71;
+41--47\,\%). The sCO$_2$ efficiency rise at 80\,\% load at 200\,\textdegree C
+is a pressure-ratio effect of sliding-pressure control, not a near-critical
+effect.
+
+\section{Original Contributions}
+\label{sec:contributions}
+
+\begin{enumerate}[leftmargin=1.8em,itemsep=5pt]
+\item \textbf{A consistent three-cycle Australian benchmark.} All three
+cycles modelled with the same property library, turbomachinery efficiencies,
+recuperator definition, heater integration, cost correlations and economic
+basis, at three real Australian sites, with every number regenerated from one
+script. No published study does this for SRC, sCO$_2$ and tCO$_2$ together.
+\item \textbf{Quantification of why the CO$_2$ advantage is
+conditional.} The thesis isolates four boundary conditions --- recuperator
+energy balance, heat-sink temperature, steam baseline and cycle layout ---
+and quantifies each: a cold-side-only recuperator overstates tCO$_2$
+efficiency by 9--10 points; a 32$\to$40\,\textdegree C compressor inlet
+removes 42\,\% of sCO$_2$ efficiency at 200\,\textdegree C; a 14\,\textdegree C
+condenser costs more to provide than the tCO$_2$ cycle produces at
+200\,\textdegree C.
+\item \textbf{Corrected heater integration for near-critical CO$_2$.} With
+a duty-linear gas profile the tCO$_2$ heater exhibits a double pinch with a
+mid-exchanger bulge of 42--65\,K, and two-point LMTD overestimates its area
+by 129--223\,\% at $\varepsilon = 0$. The thesis also shows that the heater
+inlet temperature, raised by recuperation, is the floor on heat recovery.
+\item \textbf{A fixed-source figure of merit.} Net work per kilogram of
+waste gas (Eq.~\ref{eq:wgas}), combined with cost at the delivered output,
+is shown to rank cycles differently from thermal efficiency, and to be the
+quantity on which the only CO$_2$ economic win (tCO$_2$ at
+200\,\textdegree C) rests.
+\item \textbf{A selection framework for Australian industry} validated
+against 10,000-sample Monte Carlo uncertainty and transparent about its
+revisions from the interim stage.
+\end{enumerate}
+
+\section{Recommendations for Future Work}
+\label{sec:future_work}
+
+\begin{enumerate}[leftmargin=1.8em,itemsep=4pt]
+\item \textbf{Cascade and split-flow sCO$_2$ layouts} for deep recovery,
+evaluated on the same fixed-source basis, since the simple recuperated
+layout's shallow recovery is its principal economic handicap.
+\item \textbf{Joint optimisation of CO$_2$ pressures and recuperator
+effectiveness for $w_{gas}$}, as was done for the steam pressure here,
+with the chiller or cooling-tower system costed explicitly as a function of
+site wet-bulb temperature.
+\item \textbf{Vendor-based costs for sub-5\,MW CO$_2$ turbomachinery and
+PCHEs}, including pressure drop, to replace the extrapolated Weiland
+correlations; and a condensing-turbine cost for steam to replace the
+back-pressure benchmark.
+\item \textbf{Dynamic simulation} with turbomachinery maps and heater
+re-integration at part load, to replace the single-coefficient Stodola model.
+\item \textbf{Identification of Australian sites with natural cold sinks}
+(cold groundwater, deep-water intakes, LNG regasification cold) where the
+tCO$_2$ cycle's recovery advantage could be realised.
+\item \textbf{Lifecycle greenhouse-gas and carbon-price sensitivity}, which
+would favour the cycle that recovers the most energy rather than the one
+with the lowest capital cost.
+\end{enumerate}
+
+\section{Concluding Statement}
+\label{sec:concluding}
+
+Industrial waste heat recovery in Australia is a sound investment above
+300\,\textdegree C: at 2026 costs and prices a steam Rankine plant at a
+cement preheater or an electric arc furnace returns its capital in three to
+four years and is profitable in essentially every scenario examined. The
+CO$_2$ cycles do not displace it. Their compactness is real and their
+part-load behaviour is better, but at Australian sink temperatures the
+supercritical Brayton cycle loses the near-critical compression on which its
+efficiency depends, and the transcritical Rankine cycle --- which recovers
+more energy than steam from any stream below 400\,\textdegree C --- needs a
+condenser colder than the country can supply without spending more on
+refrigeration than the cycle earns. The thermodynamics that make CO$_2$
+attractive in the literature are not wrong; they belong to cold climates,
+hot sources and optimised layouts. For an Australian operator in 2026 the
+recommendation is steam at 350\,\textdegree C and above, a careful site-
+specific study at 200\,\textdegree C, and transcritical CO$_2$ wherever a
+natural cold sink makes its deep recovery usable.

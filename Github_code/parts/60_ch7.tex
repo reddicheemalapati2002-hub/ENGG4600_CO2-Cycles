@@ -1,0 +1,140 @@
+%% ============================================================
+%% CHAPTER 7 — RQ4: OFF-DESIGN
+%% ============================================================
+\chapter{Off-Design and Part-Load Performance (RQ4)}
+\label{ch:results_rq4}
+
+This chapter answers RQ4. Section~\ref{sec:rq4_partload} reports efficiency
+retention at five load levels for each cycle at each site design point, and
+Section~\ref{sec:rq4_flexibility} the Marchionni flexibility scores.
+
+\section{Part-Load Efficiency Curves}
+\label{sec:rq4_partload}
+
+\begin{figure}[H]
+\centering
+\thesisfig{RQ4_OFFDESIGN_PARTLOAD.png}{1.0}{10cm}
+\caption{Efficiency retention versus load at the three site design points
+(Stodola correction with sliding-pressure control) and the Marchionni
+flexibility scores.}
+\label{fig:offdesign}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\caption{Thermal efficiency (\%) at part load, and retention relative to the
+design point (in parentheses).}
+\label{tab:partload}
+\renewcommand{\arraystretch}{1.25}
+\footnotesize
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{0.9cm}>{\raggedright\arraybackslash}p{1.0cm}
+  >{\centering\arraybackslash}X >{\centering\arraybackslash}X >{\centering\arraybackslash}X >{\centering\arraybackslash}X >{\centering\arraybackslash}X}
+\toprule
+\rowcolor{tableheader}
+\textbf{Site} & \textbf{Cycle} & \textbf{100\,\%} & \textbf{80\,\%} & \textbf{60\,\%} & \textbf{40\,\%} & \textbf{20\,\%} \\
+\midrule
+\rowcolor{rowgray} CS2 & SRC     & 14.44 & 13.24 (0.917) & 11.49 (0.796) & 9.09 (0.629)  & 5.55 (0.384) \\
+                   CS2 & sCO$_2$ & 11.43 & 11.50 (1.006) & 10.33 (0.904) & 8.00 (0.700)  & 4.68 (0.410) \\
+\rowcolor{rowgray} CS2 & tCO$_2$ & 15.67 & 14.70 (0.938) & 13.18 (0.841) & 11.17 (0.713) & 8.75 (0.558) \\
+\midrule
+                   CS1 & SRC     & 23.67 & 22.49 (0.950) & 20.55 (0.868) & 17.76 (0.751) & 13.76 (0.582) \\
+\rowcolor{rowgray} CS1 & sCO$_2$ & 22.24 & 21.09 (0.948) & 18.66 (0.839) & 14.99 (0.674) & 10.13 (0.455) \\
+                   CS1 & tCO$_2$ & 24.97 & 23.95 (0.959) & 22.21 (0.889) & 19.79 (0.792) & 16.73 (0.670) \\
+\midrule
+\rowcolor{rowgray} CS3 & SRC     & 30.82 & 29.68 (0.963) & 27.63 (0.897) & 24.59 (0.798) & 20.21 (0.656) \\
+                   CS3 & sCO$_2$ & 27.58 & 25.89 (0.939) & 22.91 (0.831) & 18.61 (0.675) & 12.99 (0.471) \\
+\rowcolor{rowgray} CS3 & tCO$_2$ & 28.49 & 27.21 (0.955) & 25.18 (0.884) & 22.42 (0.787) & 18.97 (0.666) \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{findingbox}
+\textbf{Finding 28 --- The tCO$_2$ cycle retains the most efficiency at deep
+part load; the sCO$_2$ cycle loses the most.}
+At 20\,\% load tCO$_2$ retains \keyresult{56--67\,\%} of its design
+efficiency, steam 38--66\,\% and sCO$_2$ 41--47\,\%. The tCO$_2$ advantage
+comes from the liquid pump, whose work falls in proportion to flow while
+the Stodola penalty applies only to the turbine, and from the gentler
+sliding-pressure schedule ($0.6 + 0.4f$) that a pumped cycle can tolerate.
+The sCO$_2$ cycle carries the Stodola penalty on both its turbine and its
+compressor, and because the compressor already absorbs 31--64\,\% of
+turbine work at design, a proportionate loss in both machines erodes the net
+output fastest.
+\end{findingbox}
+
+\begin{findingbox}
+\textbf{Finding 29 --- The steam cycle's part-load behaviour depends strongly
+on its design pressure: it is the most robust cycle at 500\,\textdegree C and
+the least at 200\,\textdegree C.}
+At CS3, where the boiler runs at 3.7\,MPa, steam retains 90\,\% at 60\,\%
+load and 66\,\% at 20\,\% load, marginally better than tCO$_2$. At CS2 the
+pinch-limited boiler pressure is only 0.16\,MPa, and sliding it to
+0.03\,MPa at 20\,\% load leaves little expansion ratio above the 10\,kPa
+condenser: retention falls to \keyresult{38\,\%}. Low-grade steam WHR is
+therefore poorly suited to a fluctuating source.
+\end{findingbox}
+
+\begin{findingbox}
+\textbf{Finding 30 --- The apparent efficiency \emph{gain} of sCO$_2$ at
+80\,\% load at the 200\,\textdegree C site is a pressure-ratio effect, not a
+near-critical effect.}
+At CS2 the sCO$_2$ retention at 80\,\% load is 1.006. The sliding-pressure
+schedule lowers the high-side pressure from 20 to 18\,MPa, and at a
+190\,\textdegree C turbine inlet the design pressure ratio of 2.5 is above
+the efficiency-optimal ratio, so the reduction helps more than the Stodola
+penalty hurts. The compressor inlet state is fixed at 36\,\textdegree C and
+8\,MPa at all loads, so the Interim Report's attribution of this feature to
+near-critical compressor behaviour is withdrawn. The effect vanishes at
+350 and 500\,\textdegree C, where the design pressure ratio is closer to
+optimal.
+\end{findingbox}
+
+\section{Operational Flexibility Scoring}
+\label{sec:rq4_flexibility}
+
+\begin{table}[H]
+\centering
+\caption{Marchionni flexibility scores (retention values averaged over the
+three sites).}
+\label{tab:flexibility}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{1.5cm}
+  >{\centering\arraybackslash}X >{\centering\arraybackslash}X >{\centering\arraybackslash}X
+  >{\centering\arraybackslash}X >{\centering\arraybackslash}X}
+\toprule
+\rowcolor{tableheader}
+\textbf{Cycle} & \textbf{Turndown (0.30)} & \textbf{$\eta$ at 60\,\% (0.30)} &
+\textbf{$\eta$ at 40\,\% (0.25)} & \textbf{Start-up (0.15)} & \textbf{Total} \\
+\midrule
+\rowcolor{rowgray}
+SRC     & 0.70 & 0.854 & 0.726 & 0.55 & 0.730 \\
+sCO$_2$ & 0.55 & 0.858 & 0.683 & 0.75 & 0.706 \\
+\rowcolor{rowgray}
+tCO$_2$ & 0.70 & 0.871 & 0.764 & 0.80 & \textbf{0.782} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+The tCO$_2$ cycle scores highest (0.782), steam second (0.730) and sCO$_2$
+third (0.706). The ordering is the same as the Interim Report's, but the
+margins are smaller (the interim scores were 0.854, 0.763 and 0.801 for
+tCO$_2$, steam and sCO$_2$) because the corrected recuperator reduces the
+part-load advantage of both CO$_2$ cycles and the pinch-limited steam
+pressures change the steam curves. The tCO$_2$ lead rests on three
+properties: a liquid pump, the simplest start-up of the three (no steam drum,
+no near-critical compressor control), and the best efficiency retention at
+60 and 40\,\% load.
+
+\section{Summary of RQ4 Results}
+\label{sec:rq4_summary}
+
+For a fluctuating heat source the transcritical CO$_2$ cycle is the most
+flexible of the three, retaining 56--67\,\% of its design efficiency at
+one-fifth load and scoring 0.78 on the Marchionni scale against 0.73 for
+steam and 0.71 for sCO$_2$. The steam cycle is nearly as flexible at high
+source temperature but degrades badly at 200\,\textdegree C, where its boiler
+pressure is already very low. The sCO$_2$ cycle degrades fastest at deep
+part load at every site. Flexibility is the one criterion on which tCO$_2$
+is unambiguously preferred, and it is most valuable precisely at the
+batch-type sources (electric arc furnaces, intermittent process trains)
+where it matters.

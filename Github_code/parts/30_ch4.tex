@@ -1,0 +1,580 @@
+%% ============================================================
+%% CHAPTER 4 — RQ1: THERMODYNAMIC RESULTS
+%% ============================================================
+\chapter{Thermodynamic Performance Results (RQ1)}
+\label{ch:results_rq1}
+
+This chapter presents all results addressing RQ1. Section~\ref{sec:results_firstlaw}
+covers first-law parametric performance; Section~\ref{sec:results_exergy} the
+second-law exergy analysis; Section~\ref{sec:results_transitional} the
+pseudo-critical heater integration; and Sections~\ref{sec:recup_sensitivity}
+and~\ref{sec:plow_sensitivity} the recuperator and condensing-pressure
+sensitivity sweeps, together with the warm-climate sensitivity of the sCO$_2$
+compressor inlet. The thirteen findings of this chapter differ in several
+respects from the Interim Report because of the recuperator correction
+described in Section~\ref{sec:method_recup}; the differences are stated
+explicitly where they arise.
+
+\section{Model Validation}
+\label{sec:results_validation}
+
+SRC validation against NIST Webbook gave a maximum enthalpy deviation of
+0.031\,\% (Table~\ref{tab:validation}), well inside the 1\,\% criterion.
+CoolProp's CO$_2$ critical point ($T_c = 30.98$\,\textdegree C, $P_c =
+7.377$\,MPa) matches NIST REFPROP to within 0.04\,\%. Physical
+self-consistency checks at the SRC baseline (400\,\textdegree C TIT,
+10\,MPa, 10\,kPa condenser) gave condenser temperature 45.8\,\textdegree C,
+BWR 1.31\,\% and $\eta_{th}$ 32.79\,\%, all within expected ranges for
+subcritical steam at this condition. The global exergy balance
+(Eq.~\ref{eq:exergy_balance}) closes to machine precision for all three
+cycles, and the discretised recuperator shows a positive temperature
+difference at every node for every case reported (the smallest, 2.7\,K, is
+the sCO$_2$ recuperator at the 200\,\textdegree C site, discussed in
+Section~\ref{sec:rq2_sitedesign}).
+
+\section{First-Law Parametric Performance}
+\label{sec:results_firstlaw}
+
+Figure~\ref{fig:threecycle} shows thermal efficiency and back-work ratio
+across 150--600\,\textdegree C turbine inlet temperature for all three cycles
+under the sweep rules of Section~\ref{sec:method_thermo}, and
+Table~\ref{tab:rq1_results} extracts the values at the three Australian case
+study temperatures.
+
+\begin{figure}[H]
+\centering
+\thesisfig{RQ1_THREE_CYCLE.png}{0.92}{10cm}
+\caption{Three-cycle thermal efficiency (top) and back-work ratio (bottom)
+versus turbine inlet temperature, 150--600\,\textdegree C. Dashed lines mark
+the Australian case study temperatures. Parameters: $\eta_{turbine} = 0.85$,
+$\eta_{pump/comp} = 0.80$; SRC: $\le$10\,MPa, 10\,kPa condenser; sCO$_2$:
+20/8\,MPa, $\varepsilon = 0.85$, compressor inlet 36\,\textdegree C; tCO$_2$:
+$P_{high}(T)$, $P_{low} = 5$\,MPa, $\varepsilon = 0.70$. Recuperators limited
+by both streams (Eq.~\ref{eq:recup}).}
+\label{fig:threecycle}
+\end{figure}
+
+\begin{findingbox}
+\textbf{Finding 1 --- Under the modelled assumptions the steam Rankine cycle
+has the highest thermal efficiency at every turbine inlet temperature from
+150 to 600\,\textdegree C.}
+SRC rises from 19.06\,\% to 35.38\,\%; tCO$_2$ from 13.28\,\% to 30.12\,\%;
+sCO$_2$ from 5.29\,\% to 30.09\,\%. The two CO$_2$ cycles converge on each
+other at 600\,\textdegree C (\keyresult{30.1\,\% for both}) but remain
+5.3~percentage points below steam. No crossover occurs within the WHR range.
+This reverses the Interim Report's Findings~1 and~2 (sCO$_2$/SRC crossover at
+362\,\textdegree C; tCO$_2$ ahead of SRC everywhere), both of which rested on
+recuperators that transferred more heat than the hot stream could supply
+(Section~\ref{sec:method_recup}). The steam figures are unchanged.
+\end{findingbox}
+
+\begin{findingbox}
+\textbf{Finding 2 --- sCO$_2$ back-work ratio is prohibitive below
+$\approx$300\,\textdegree C.}
+At 150\,\textdegree C the compressor absorbs \keyresult{79.8\,\% of turbine
+output}; at 200\,\textdegree C, 61.7\,\%; at 300\,\textdegree C, 45.0\,\%;
+and still 26.9\,\% at 600\,\textdegree C. The tCO$_2$ pump absorbs 23.1\,\%
+at 150\,\textdegree C (higher than the literature-reported 2--5\,\% owing to
+$P_{low} = 5$\,MPa), falling to 12.4\,\% at 600\,\textdegree C. The SRC feed
+pump stays below 1.5\,\% throughout. BWR, not turbine work, is why the
+CO$_2$ cycles trail steam: the gross specific turbine work of the CO$_2$
+cycles is comparable to steam per unit of heat input, but a quarter to
+three-quarters of it is returned to the compressor.
+\end{findingbox}
+
+\begin{findingbox}
+\textbf{Finding 3 --- The recuperator gain is bounded by the hot stream.}
+With the effectiveness applied to the limiting stream, recuperation at
+$\varepsilon = 0.70$ raises the tCO$_2$ efficiency by \keyresult{+3.4, +7.0
+and +10.1 percentage points} at the 200, 350 and 500\,\textdegree C site
+conditions (12.2$\to$15.7\,\%, 18.0$\to$25.0\,\%, 18.4$\to$28.5\,\%), compared
+with the +12.3, +16.8 and +20.3 points obtained at the interim stage with a
+cold-side-only effectiveness. The hot-side limit binds because the 5\,MPa
+exhaust has a much smaller enthalpy capacity than the near-critical
+high-pressure stream it heats.
+\end{findingbox}
+
+\begin{table}[H]
+\centering
+\caption{Thermal efficiency and back-work ratio at the Australian case study
+turbine inlet temperatures (parametric sweep rules;
+$\varepsilon_{sCO_2} = 0.85$, $\varepsilon_{tCO_2} = 0.70$, $P_{low,tCO_2} = 5$\,MPa).}
+\label{tab:rq1_results}
+\renewcommand{\arraystretch}{1.35}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{3.8cm}
+  >{\centering\arraybackslash}X >{\centering\arraybackslash}X >{\centering\arraybackslash}X}
+\toprule
+\rowcolor{tableheader}
+\textbf{Parameter} &
+\textbf{200\,\textdegree C (CS2)} &
+\textbf{350\,\textdegree C (CS1)} &
+\textbf{500\,\textdegree C (CS3)} \\
+\midrule
+\rowcolor{rowgray}
+SRC $\eta_{th}$ (\%)     & 24.45 & 32.13 & 34.06 \\
+sCO$_2$ $\eta_{th}$ (\%) & 12.53 & 22.70 & 27.84 \\
+\rowcolor{rowgray}
+tCO$_2$ $\eta_{th}$ (\%) & 16.09 & 25.28 & 28.66 \\
+\midrule
+SRC BWR (\%)              & 0.29  & 1.42  & 1.15 \\
+\rowcolor{rowgray}
+sCO$_2$ BWR (\%)         & 61.74 & 40.14 & 30.85 \\
+tCO$_2$ BWR (\%)         & 19.98 & 18.56 & 14.22 \\
+\midrule
+\rowcolor{rowgray}
+Best cycle ($\eta_{th}$) & SRC & SRC & SRC \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Second-Law Analysis}
+\label{sec:results_exergy}
+
+\subsection{Basis of Comparison}
+
+Exergy destruction is conventionally tabulated per kilogram of working fluid.
+For a comparison of cycles that is misleading, because at a common turbine
+inlet temperature the three cycles circulate very different mass flows per
+kilowatt: at 400\,\textdegree C the net specific work is 948\,kJ/kg for steam,
+108\,kJ/kg for tCO$_2$ and 57\,kJ/kg for sCO$_2$. A kilogram of CO$_2$
+destroys far less exergy than a kilogram of steam simply because it does far
+less work. Figure~\ref{fig:exergy} therefore shows both bases, and
+Table~\ref{tab:exergy} reports destruction per kilojoule of net work, which
+is the like-for-like quantity. The Interim Report's statement that sCO$_2$
+destroys 95\,\% less exergy than steam compared the per-kilogram totals and
+is withdrawn.
+
+\begin{figure}[H]
+\centering
+\thesisfig{RQ1_EXERGY.png}{1.0}{8cm}
+\caption{Component exergy destruction at a common turbine inlet temperature of
+400\,\textdegree C (dead state 25\,\textdegree C, 101.325\,kPa), per kilogram
+of working fluid (left) and per kilojoule of net work (right). The right-hand
+panel is the comparable basis.}
+\label{fig:exergy}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\caption{Exergy destruction at 400\,\textdegree C turbine inlet temperature,
+in kJ per kJ of net work (per-kilogram totals in the last column).}
+\label{tab:exergy}
+\renewcommand{\arraystretch}{1.3}
+\footnotesize
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{1.5cm}
+  >{\centering\arraybackslash}X >{\centering\arraybackslash}X >{\centering\arraybackslash}X
+  >{\centering\arraybackslash}X >{\centering\arraybackslash}X >{\centering\arraybackslash}p{1.3cm}
+  >{\centering\arraybackslash}p{1.3cm} >{\centering\arraybackslash}p{1.7cm}}
+\toprule
+\rowcolor{tableheader}
+\textbf{Cycle} & \textbf{Pump/ comp.} & \textbf{Heater} & \textbf{Turbine} &
+\textbf{Cond./ cooler} & \textbf{Recup.} & \textbf{Total} & \textbf{$\eta_{ex}$ (\%)} & \textbf{Total (kJ/kg)} \\
+\midrule
+\rowcolor{rowgray}
+SRC     & 0.002 & 0.396 & 0.167 & 0.134 & ---   & \textbf{0.699} & 58.9 & 663.2 \\
+sCO$_2$ & 0.094 & 0.306 & 0.144 & 0.357 & 0.351 & \textbf{1.252} & 44.4 & 71.5 \\
+\rowcolor{rowgray}
+tCO$_2$ & 0.040 & 0.569 & 0.120 & 0.013 & 0.351 & \textbf{1.092} & 47.8 & 117.7 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{findingbox}
+\textbf{Finding 4 --- The steam boiler is the single largest loss in any
+cycle, but per unit of work steam remains the most exergy-efficient cycle
+at 400\,\textdegree C.}
+The boiler destroys \keyresult{375\,kJ/kg, 56.6\,\% of all SRC losses},
+because water evaporates at a fixed temperature well below the source. Yet
+the SRC destroys only 0.70\,kJ of exergy per kJ of net work against 1.09 for
+tCO$_2$ and 1.25 for sCO$_2$, with exergy efficiencies of 58.9, 47.8 and
+44.4\,\%. The CO$_2$ cycles' non-isothermal heating does reduce heater
+destruction per unit of work (0.31 for sCO$_2$ versus 0.40 for steam), but
+the saving is more than consumed by their recuperators (0.35 each) and, for
+sCO$_2$, by the compressor and gas cooler (0.09 and 0.36).
+\end{findingbox}
+
+\begin{findingbox}
+\textbf{Finding 5 --- For the CO$_2$ cycles the recuperator, not the heater,
+is the dominant internal irreversibility.}
+At 400\,\textdegree C the recuperator accounts for 28\,\% of sCO$_2$
+destruction and 32\,\% of tCO$_2$ destruction, as large as the heater in the
+sCO$_2$ case. The large temperature differences that a fixed-effectiveness
+recuperator tolerates when the two streams have very different $c_p$ are a
+genuine second-law cost, and they grow with source temperature
+(Section~\ref{sec:recup_sensitivity}).
+\end{findingbox}
+
+\subsection{Exergy at the Site Design Points}
+
+Table~\ref{tab:exergy_sites} repeats the analysis at the three site design
+points of Section~\ref{sec:rq2_sitedesign}, where the steam cycle operates at
+the pinch-limited boiler pressure rather than at 10\,MPa. Two features stand
+out. First, with a realistic boiler pressure the tCO$_2$ cycle is the most
+exergy-efficient option at 200 and 350\,\textdegree C (42.4 and 47.9\,\%
+against 39.0 and 45.4\,\% for steam), and steam leads only at 500\,\textdegree C.
+Second, the tCO$_2$ condenser term is \emph{negative} at 200 and
+350\,\textdegree C. The condenser rejects heat at 14.3\,\textdegree C, below
+the 25\,\textdegree C dead state, so the condensate leaving it carries more
+exergy (``cold exergy'') than the vapour entering. The balance closes only
+because the model does not charge the cycle for the refrigeration needed to
+supply a 14\,\textdegree C sink; that charge is quantified in
+Section~\ref{sec:plow_sensitivity}.
+
+\begin{table}[H]
+\centering
+\caption{Exergy destruction at the site design points (per kJ net work) with
+the heat source treated as a reservoir at $T_{src}$.}
+\label{tab:exergy_sites}
+\renewcommand{\arraystretch}{1.3}
+\footnotesize
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{1.0cm}>{\raggedright\arraybackslash}p{1.1cm}
+  >{\centering\arraybackslash}X >{\centering\arraybackslash}X >{\centering\arraybackslash}X
+  >{\centering\arraybackslash}X >{\centering\arraybackslash}X >{\centering\arraybackslash}X
+  >{\centering\arraybackslash}p{1.2cm} >{\centering\arraybackslash}p{1.2cm}}
+\toprule
+\rowcolor{tableheader}
+\textbf{Site} & \textbf{Cycle} & \textbf{Pump/ comp.} & \textbf{Heater} & \textbf{Turbine} &
+\textbf{Cond./ cooler} & \textbf{Recup.} & \textbf{Total} & \textbf{$\eta_{th}$ (\%)} & \textbf{$\eta_{ex}$ (\%)} \\
+\midrule
+\rowcolor{rowgray} CS2 & SRC     & 0.000 & 1.010 & 0.165 & 0.387 & --- & 1.562 & 14.4 & 39.0 \\
+                   CS2 & sCO$_2$ & 0.298 & 0.807 & 0.390 & 0.724 & 0.016 & 2.235 & 11.4 & 30.9 \\
+\rowcolor{rowgray} CS2 & tCO$_2$ & 0.052 & 1.085 & 0.175 & $-$0.140 & 0.187 & 1.360 & 15.7 & 42.4 \\
+\midrule
+                   CS1 & SRC     & 0.000 & 0.828 & 0.165 & 0.210 & --- & 1.204 & 23.7 & 45.4 \\
+\rowcolor{rowgray} CS1 & sCO$_2$ & 0.114 & 0.400 & 0.172 & 0.386 & 0.272 & 1.345 & 22.2 & 42.6 \\
+                   CS1 & tCO$_2$ & 0.046 & 0.658 & 0.137 & $-$0.017 & 0.265 & 1.089 & 25.0 & 47.9 \\
+\midrule
+\rowcolor{rowgray} CS3 & SRC     & 0.001 & 0.681 & 0.166 & 0.146 & --- & 0.994 & 30.8 & 50.2 \\
+                   CS3 & sCO$_2$ & 0.075 & 0.261 & 0.117 & 0.335 & 0.440 & 1.228 & 27.6 & 44.9 \\
+\rowcolor{rowgray} CS3 & tCO$_2$ & 0.033 & 0.504 & 0.101 & 0.055 & 0.463 & 1.157 & 28.5 & 46.4 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Transitional Effects: Pseudo-Critical Heater Integration}
+\label{sec:results_transitional}
+
+Figures~\ref{fig:pinch_200}--\ref{fig:pinch_500} show the tCO$_2$ heater T-h
+diagrams at the three site conditions with $\varepsilon = 0$, so that the
+pseudo-critical $c_p$ peak lies inside the heater, and
+Table~\ref{tab:pinch} summarises the integration.
+
+\begin{figure}[H]
+\centering
+\thesisfig{tco2_pinch_200C.png}{0.9}{9cm}
+\caption{tCO$_2$ heater T-h diagram and $c_p$ profile for CS2 gas processing
+(200\,\textdegree C source, 12.8\,MPa, $\varepsilon = 0$). Upper panel: CO$_2$
+temperature (gold) and waste-gas temperature (red dashed, linear in heat
+duty) versus cumulative heat transferred from the cold end. The approach of
+10\,K is reached at \emph{both} terminals; the gap widens to 41.6\,K at a
+CO$_2$ temperature of 88\,\textdegree C, just beyond the pseudo-critical
+temperature of 57.1\,\textdegree C. Lower panel: $c_p$ along the heater, peak
+4.42\,kJ/(kg$\cdot$K).}
+\label{fig:pinch_200}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\thesisfig{tco2_pinch_350C.png}{0.9}{9cm}
+\caption{tCO$_2$ heater T-h diagram and $c_p$ profile for CS1 cement
+(350\,\textdegree C source, 20.0\,MPa, $\varepsilon = 0$). At 20\,MPa the $c_p$
+peak is broader and lower (2.62\,kJ/(kg$\cdot$K) at 76\,\textdegree C); the
+pump exit temperature rises to 32.1\,\textdegree C, so the gas cannot be
+cooled below 42.1\,\textdegree C. Largest gap 49.0\,K at 145\,\textdegree C.}
+\label{fig:pinch_350}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\thesisfig{tco2_pinch_500C.png}{0.9}{9cm}
+\caption{tCO$_2$ heater T-h diagram and $c_p$ profile for CS3 steel
+(500\,\textdegree C source, 20.0\,MPa, $\varepsilon = 0$). The large
+source-to-sink span drives total heater duty to 701\,kJ/kg; largest gap
+64.7\,K at 166\,\textdegree C.}
+\label{fig:pinch_500}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\caption{tCO$_2$ heater integration at $\varepsilon = 0$ (10\,K approach,
+turbine inlet $T_{src} - 10$\,K) and the corresponding design values at
+$\varepsilon = 0.70$.}
+\label{tab:pinch}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{6.2cm}
+  >{\centering\arraybackslash}X >{\centering\arraybackslash}X >{\centering\arraybackslash}X}
+\toprule
+\rowcolor{tableheader}
+\textbf{Parameter} & \textbf{CS2 (200\,\textdegree C)} & \textbf{CS1 (350\,\textdegree C)} & \textbf{CS3 (500\,\textdegree C)} \\
+\midrule
+\rowcolor{rowgray}
+$P_{high}$ (MPa)                                 & 12.8  & 20.0  & 20.0 \\
+Pump exit temperature (\textdegree C)            & 24.3  & 32.1  & 32.1 \\
+\rowcolor{rowgray}
+$T_{pc}$ (\textdegree C) / peak $c_p$ (kJ/kg$\cdot$K) & 57.1 / 4.42 & 76.2 / 2.62 & 75.8 / 2.62 \\
+Gas outlet temperature, $\varepsilon = 0$ (\textdegree C) & 34.3 & 42.1 & 42.1 \\
+\rowcolor{rowgray}
+Heater duty, $\varepsilon = 0$ (kJ/kg)           & 360.5 & 517.3 & 701.3 \\
+Minimum $\Delta T$ (K) and location              & 10.0, both ends & 10.0, both ends & 10.0, both ends \\
+\rowcolor{rowgray}
+Maximum $\Delta T$ (K) at $T_{CO_2}$ (\textdegree C) & 41.6 at 88 & 49.0 at 145 & 64.7 at 166 \\
+Effective LMTD, segmented (K)                    & 22.9  & 27.1  & 32.3 \\
+\midrule
+\rowcolor{rowgray}
+Heater inlet, $\varepsilon = 0.70$ (\textdegree C) & 50.2 & 91.1 & 141.1 \\
+Gas outlet, $\varepsilon = 0.70$ (\textdegree C)  & 60.2 & 101.1 & 151.1 \\
+\rowcolor{rowgray}
+Effective LMTD, $\varepsilon = 0.70$ (K)          & 23.2 & 21.3 & 16.1 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{findingbox}
+\textbf{Finding 6 --- The tCO$_2$ heater is pinched at both terminals, and the
+pseudo-critical $c_p$ peak opens the driving force in the middle rather than
+closing it.}
+With the gas profile linear in heat duty, the 10\,K approach is reached at
+the cold end and at the hot end simultaneously, and the temperature
+difference bulges to \keyresult{41.6, 49.0 and 64.7\,K} at CO$_2$ temperatures
+of 88, 145 and 166\,\textdegree C, downstream of $T_{pc}$. The mechanism is
+that CO$_2$ absorbs a large share of the duty while its temperature is still
+low (high $c_p$), so its curve falls below the straight line joining its end
+points while the gas, with constant $c_p$, follows that straight line. The
+Interim Report's Finding~7 (``the pinch sits mid-exchanger at
+129\,\textdegree C'') was an artefact of an index-linear gas profile that
+produced a constant 10\,K gap everywhere, and is withdrawn.
+\end{findingbox}
+
+\begin{findingbox}
+\textbf{Finding 7 --- The heater inlet temperature sets a hard floor on waste
+heat recovery, and recuperation raises that floor.}
+At $\varepsilon = 0$ the floor is the pump exit: the gas cannot leave below
+\keyresult{34.3\,\textdegree C} at 12.8\,MPa or 42.1\,\textdegree C at
+20\,MPa. At the design effectiveness of 0.70 the heater inlet rises to 50,
+91 and 141\,\textdegree C and the gas can only be cooled to 60, 101 and
+151\,\textdegree C. Recuperation therefore trades depth of heat recovery for
+cycle efficiency, a trade quantified in Section~\ref{sec:recup_sensitivity}.
+\end{findingbox}
+
+\begin{findingbox}
+\textbf{Finding 8 --- The pseudo-critical peak sharpens as pressure falls.}
+At 12.8\,MPa, $T_{pc} = 57.1$\,\textdegree C with peak $c_p =
+4.42$\,kJ/(kg$\cdot$K); at 20\,MPa, $T_{pc} = 76$\,\textdegree C with peak
+$c_p = 2.62$\,kJ/(kg$\cdot$K). Lower pressure produces the more non-uniform
+profile and therefore the larger departure between segmented and two-point
+sizing, but the pump exit temperature is also lower, which deepens heat
+recovery. The high-side pressure is thus a trade-off between heater
+non-uniformity and recovery depth, in addition to its effect on efficiency.
+\end{findingbox}
+
+\section{Recuperator Sensitivity}
+\label{sec:recup_sensitivity}
+
+Figure~\ref{fig:recup_sensitivity} and Table~\ref{tab:recup} show the tCO$_2$
+cycle at $\varepsilon = 0$, 0.50, 0.70 and 0.85 at each site design point.
+
+\begin{figure}[H]
+\centering
+\thesisfig{RQ1_RECUPERATOR_SENSITIVITY.png}{1.0}{9cm}
+\caption{tCO$_2$ recuperator effectiveness sensitivity at the three site design
+points: thermal efficiency, net work per kilogram of waste gas, recuperator
+duty and the achievable gas outlet temperature.}
+\label{fig:recup_sensitivity}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\caption{tCO$_2$ recuperator sensitivity ($P_{low} = 5$\,MPa, 10\,K approach).
+$w_{gas}$ is the net work per kilogram of waste gas (Eq.~\ref{eq:wgas}).}
+\label{tab:recup}
+\renewcommand{\arraystretch}{1.25}
+\footnotesize
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{1.0cm}>{\centering\arraybackslash}p{0.9cm}
+  >{\centering\arraybackslash}X >{\centering\arraybackslash}X >{\centering\arraybackslash}X
+  >{\centering\arraybackslash}X >{\centering\arraybackslash}X >{\centering\arraybackslash}X
+  >{\centering\arraybackslash}p{1.6cm}}
+\toprule
+\rowcolor{tableheader}
+\textbf{Site} & $\varepsilon$ & $\eta_{th}$ (\%) & BWR (\%) & $q_{in}$ (kJ/kg) & $Q_{recup}$ (kJ/kg) &
+Heater inlet (\textdegree C) & Gas out (\textdegree C) & $w_{gas}$ (kJ/kg gas) \\
+\midrule
+\rowcolor{rowgray} CS2 & 0    & 12.23 & 20.69 & 360.5 & 0.0   & 24.3  & 34.3  & 22.30 \\
+                   CS2 & 0.50 & 14.51 & 20.69 & 304.0 & 56.5  & 44.1  & 54.1  & 23.28 \\
+\rowcolor{rowgray} CS2 & 0.70 & 15.67 & 20.69 & 281.4 & 79.1  & 50.2  & 60.2  & 24.10 \\
+                   CS2 & 0.85 & 16.68 & 20.69 & 264.5 & 96.0  & 54.2  & 64.2  & 24.91 \\
+\midrule
+\rowcolor{rowgray} CS1 & 0    & 17.97 & 18.97 & 517.3 & 0.0   & 32.1  & 42.1  & 60.85 \\
+                   CS1 & 0.50 & 22.47 & 18.97 & 413.7 & 103.6 & 75.0  & 85.0  & 65.49 \\
+\rowcolor{rowgray} CS1 & 0.70 & 24.97 & 18.97 & 372.3 & 145.1 & 91.1  & 101.1 & 68.36 \\
+                   CS1 & 0.85 & 27.25 & 18.97 & 341.2 & 176.2 & 104.2 & 114.2 & 70.68 \\
+\midrule
+\rowcolor{rowgray} CS3 & 0    & 18.39 & 14.44 & 701.3 & 0.0   & 32.1  & 42.1  & 92.60 \\
+                   CS3 & 0.50 & 24.62 & 14.44 & 523.7 & 177.6 & 104.8 & 114.8 & 104.33 \\
+\rowcolor{rowgray} CS3 & 0.70 & 28.49 & 14.44 & 452.7 & 248.7 & 141.1 & 151.1 & 109.32 \\
+                   CS3 & 0.85 & 32.29 & 14.44 & 399.4 & 302.0 & 174.7 & 184.7 & 111.99 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{findingbox}
+\textbf{Finding 9 --- Recuperation improves efficiency far more than it
+improves recovered work, because every increment of $\varepsilon$ raises the
+gas outlet temperature.}
+From $\varepsilon = 0$ to 0.85, $\eta_{th}$ rises by 4.5, 9.3 and
+13.9~points at CS2, CS1 and CS3, but $w_{gas}$ rises by only
+\keyresult{+12\,\%, +16\,\% and +21\,\%}, because the gas outlet temperature
+climbs from 34--42\,\textdegree C to 64--185\,\textdegree C. The marginal
+benefit also diminishes: the step 0.70$\to$0.85 adds 0.8--2.7\,kJ per
+kilogram of gas while roughly doubling the recuperator conductance. BWR is
+independent of $\varepsilon$ (20.7, 19.0 and 14.4\,\%), confirming that
+recuperation reduces external heat input only and does not alter the pump or
+turbine work.
+\end{findingbox}
+
+\begin{findingbox}
+\textbf{Finding 10 --- At high effectiveness the recuperator approaches the
+primary heater in duty, and at low source temperature it approaches the
+10\,K approach limit.}
+At $\varepsilon = 0.85$ the recuperator transfers 302\,kJ/kg at CS3, 76\,\%
+of the external heat input (399\,kJ/kg). At CS2 the same effectiveness leaves
+a minimum internal temperature difference of only \keyresult{9.8\,K},
+essentially at the design approach, so $\varepsilon = 0.85$ is the practical
+ceiling for a 200\,\textdegree C source at 12.8\,MPa. The baseline of 0.70
+retains 21--86\,K of internal margin at all three sites.
+\end{findingbox}
+
+\section{Low-Side Pressure and Heat-Sink Sensitivity}
+\label{sec:plow_sensitivity}
+
+Figure~\ref{fig:plow_sensitivity} and Table~\ref{tab:plow} show the tCO$_2$
+cycle at low-side pressures from 3.5 to 7.0\,MPa with $\varepsilon = 0.70$.
+
+\begin{figure}[H]
+\centering
+\thesisfig{RQ1_PLOW_SENSITIVITY.png}{1.0}{7cm}
+\caption{tCO$_2$ low-side pressure sensitivity ($\varepsilon = 0.70$):
+condensing temperature, thermal efficiency and back-work ratio. The shaded
+band marks the cooling-tower water temperatures typical of the three
+Australian sites.}
+\label{fig:plow_sensitivity}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\caption{tCO$_2$ low-side pressure sensitivity ($\varepsilon = 0.70$, 10\,K
+approach).}
+\label{tab:plow}
+\renewcommand{\arraystretch}{1.25}
+\footnotesize
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{1.0cm}>{\centering\arraybackslash}p{1.3cm}
+  >{\centering\arraybackslash}X >{\centering\arraybackslash}X >{\centering\arraybackslash}X
+  >{\centering\arraybackslash}X >{\centering\arraybackslash}X >{\centering\arraybackslash}p{1.7cm}}
+\toprule
+\rowcolor{tableheader}
+\textbf{Site} & $P_{low}$ (MPa) & $T_{cond}$ (\textdegree C) & $\eta_{th}$ (\%) & BWR (\%) & $w_{net}$ (kJ/kg) & Gas out (\textdegree C) & $w_{gas}$ (kJ/kg gas) \\
+\midrule
+\rowcolor{rowgray} CS2 & 3.5 & 0.2  & 18.47 & 16.72 & 61.6  & 44.7  & 31.56 \\
+                   CS2 & 4.0 & 5.3  & 17.49 & 17.98 & 55.1  & 50.7  & 28.72 \\
+\rowcolor{rowgray} CS2 & 5.0 & 14.3 & 15.67 & 20.69 & 44.1  & 60.2  & 24.10 \\
+                   CS2 & 6.0 & 22.0 & 13.99 & 23.93 & 34.8  & 67.8  & 20.33 \\
+\rowcolor{rowgray} CS2 & 7.0 & 28.7 & 12.36 & 28.88 & 26.3  & 76.5  & 16.80 \\
+\midrule
+                   CS1 & 3.5 & 0.2  & 27.59 & 15.59 & 117.5 & 80.4  & 81.82 \\
+\rowcolor{rowgray} CS1 & 4.0 & 5.3  & 26.67 & 16.68 & 108.5 & 87.6  & 76.96 \\
+                   CS1 & 5.0 & 14.3 & 24.97 & 18.97 & 93.0  & 101.1 & 68.36 \\
+\rowcolor{rowgray} CS1 & 6.0 & 22.0 & 23.41 & 21.64 & 79.5  & 114.8 & 60.57 \\
+                   CS1 & 7.0 & 28.7 & 21.91 & 25.55 & 67.0  & 131.0 & 52.79 \\
+\midrule
+\rowcolor{rowgray} CS3 & 3.5 & 0.2  & 31.56 & 11.84 & 161.5 & 120.2 & 131.86 \\
+                   CS3 & 4.0 & 5.3  & 30.48 & 12.68 & 149.6 & 130.4 & 123.92 \\
+\rowcolor{rowgray} CS3 & 5.0 & 14.3 & 28.49 & 14.44 & 129.0 & 151.1 & 109.32 \\
+                   CS3 & 6.0 & 22.0 & 26.67 & 16.49 & 111.2 & 172.9 & 95.93 \\
+\rowcolor{rowgray} CS3 & 7.0 & 28.7 & 24.95 & 19.49 & 94.9  & 197.7 & 82.97 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{findingbox}
+\textbf{Finding 11 --- The thermodynamically attractive condensing pressures
+are climatically infeasible in Australia, and the 5\,MPa baseline is itself
+marginal.}
+$P_{low} = 3.5$\,MPa condenses at 0.2\,\textdegree C and 4.0\,MPa at
+5.3\,\textdegree C --- unattainable at any of the three sites. The baseline
+5\,MPa condenses at \keyresult{14.3\,\textdegree C}, which requires a sink
+near 4\,\textdegree C for a 10\,K approach: colder than cooling-tower water
+anywhere in Australia (typically 20--32\,\textdegree C~\cite{BOM2024}) and
+achievable only with mechanical chilling. Only $P_{low} \ge 6.5$\,MPa
+(condensing above 25\,\textdegree C) is compatible with evaporative cooling
+at Gladstone or Sydney outside summer, and no subcritical pressure is
+compatible with Pilbara summer conditions.
+\end{findingbox}
+
+\begin{findingbox}
+\textbf{Finding 12 --- The cost of a cold sink would exceed the benefit of
+the cycle at low source temperatures.}
+If the 14.3\,\textdegree C condenser at 5\,MPa were served by an electric
+chiller, the parasitic load would be $q_{out}/\mathrm{COP}$. With
+$q_{out} = 237$, 279 and 324\,kJ/kg and $w_{net} = 44$, 93 and 129\,kJ/kg,
+a chiller of COP~4 would consume \keyresult{134\,\%, 75\,\% and 63\,\%} of
+the net output at CS2, CS1 and CS3 (90, 50 and 42\,\% at COP~6). Raising
+$P_{low}$ to 7\,MPa (28.7\,\textdegree C) removes the need for chilling at
+the cost of 3.1--3.5 efficiency points and 23--30\,\% of $w_{gas}$; at CS1
+the resulting 52.8\,kJ per kilogram of gas equals that of the pinch-limited
+steam cycle (Section~\ref{sec:rq2_sitedesign}).
+\end{findingbox}
+
+\begin{findingbox}
+\textbf{Finding 13 --- The warm-climate penalty on sCO$_2$ is concentrated at
+low source temperatures.}
+Raising the compressor inlet from 32 to 40\,\textdegree C (8\,MPa) reduces
+sCO$_2$ efficiency from \keyresult{15.7 to 9.2\,\%} at a 200\,\textdegree C
+turbine inlet (a 42\,\% relative loss), from 23.6 to 21.3\,\% at
+350\,\textdegree C, and from 28.0 to 27.1\,\% at 500\,\textdegree C. The
+baseline of 36\,\textdegree C, chosen as 5\,K above the critical temperature
+to guarantee single-phase compression with Australian cooling water, gives
+12.5, 22.7 and 27.8\,\%. Near-critical compression is the source of the
+sCO$_2$ cycle's advantage in the literature and it is exactly what a warm heat
+sink takes away.
+\end{findingbox}
+
+\section{Comparison with Published Results}
+\label{sec:lit_comparison}
+
+Kizilkan~\cite{Kizilkan2020} reported 27.6\,\% for sCO$_2$ and 24.2\,\% for
+steam at a 350\,\textdegree C cement source. The present steam value at the
+350\,\textdegree C \emph{site design point} (pinch-limited to 0.91\,MPa,
+Section~\ref{sec:rq2_sitedesign}) is 23.7\,\%, in close agreement; the
+present sCO$_2$ value (22.2\,\% at the site, 22.7\,\% in the sweep) is lower
+than Kizilkan's because his configuration is a recompression cycle with a
+compressor inlet near 32\,\textdegree C, whereas this study models a simple
+recuperated layout with a 36\,\textdegree C inlet and a hot-side-limited
+recuperator. Jiang et al.~\cite{Jiang2023} found tCO$_2$ up to 5~points
+ahead of sCO$_2$; this study finds tCO$_2$ ahead of sCO$_2$ by 2.6--3.6~points
+between 200 and 350\,\textdegree C, narrowing to 0.8~points at
+500\,\textdegree C, consistent in direction. Crespi et al.'s~\cite{Crespi2017}
+40--50\,\% efficiencies for sCO$_2$ apply above 500\,\textdegree C with
+optimised recompression layouts and cold sinks, conditions outside the WHR
+range and the Australian climate considered here. The disagreement with the
+literature is therefore not with the thermodynamics but with the boundary
+conditions, and Findings~11--13 identify which ones.
+
+\section{Summary of RQ1 Results}
+\label{sec:rq1_summary}
+
+Under consistent assumptions and a second-law-consistent recuperator, the
+steam Rankine cycle has the highest thermal efficiency at every turbine inlet
+temperature in the 150--600\,\textdegree C range; tCO$_2$ is second below
+500\,\textdegree C and the two CO$_2$ cycles converge above it. Per unit of
+net work the SRC is also the most exergy-efficient cycle at a common turbine
+inlet temperature, although at realistic pinch-limited boiler pressures the
+tCO$_2$ cycle leads at 200 and 350\,\textdegree C. The tCO$_2$ heater is
+pinched at both terminals with the driving force widest in the middle, so
+the transitional effect enlarges rather than restricts the mean temperature
+difference. Recuperation raises efficiency but also the gas outlet
+temperature, so it adds far less to the work recovered from a stream than to
+the efficiency. Finally, the CO$_2$ cycles' sensitivity to the heat sink is
+their defining weakness in Australia: the tCO$_2$ baseline needs a
+14\,\textdegree C condenser that would cost more to provide than the cycle
+produces at 200\,\textdegree C, and the sCO$_2$ cycle loses two-fifths of its
+efficiency at 200\,\textdegree C if its compressor inlet warms from 32 to
+40\,\textdegree C.

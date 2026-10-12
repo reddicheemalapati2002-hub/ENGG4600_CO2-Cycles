@@ -1,0 +1,295 @@
+\section{Transitional Effects: Multi-Point T-H Heater Integration (RQ1/RQ2)}
+\label{sec:method_pinch}
+
+Following supervisor feedback to model transitional thermophysical effects,
+the two-state-point energy balance of the primary heater is replaced by a
+nodal integration along the exchanger. The working fluid is discretised in
+200 equal enthalpy steps between the heater inlet and the turbine inlet, and
+the temperature and $c_p$ are evaluated from real-fluid properties at every
+node, which resolves the pseudo-critical peak. The same procedure is applied
+to the steam boiler (where CoolProp returns the saturation temperature
+through the two-phase region) and to the sCO$_2$ heater, so that all three
+cycles are integrated with the waste-gas stream by one method.
+
+The waste gas is treated as an ideal gas with constant $c_p$ in counter-flow.
+Its temperature therefore falls \emph{linearly with heat duty}, not with
+position or with node index:
+\begin{equation}
+T_{gas}(q) = T_{gas,out} + \left(T_{src} - T_{gas,out}\right)\frac{q}{Q}
+\label{eq:gas_profile}
+\end{equation}
+where $q$ is the cumulative heat transferred from the cold end and $Q$ the
+total heater duty per kilogram of working fluid. The distinction matters: a
+profile that is linear in node index implicitly assumes the gas gives up equal
+heat per node, which is false wherever the working fluid's $c_p$ varies. The
+Interim Report used an index-linear profile, which produced a spurious
+constant 10\,K difference along the whole heater; the corrected profile is
+used here.
+
+Two constraints close the problem. The turbine inlet is set 10\,K below the
+source temperature (hot-end approach), and the gas outlet temperature is
+found by bisection so that the minimum local temperature difference equals
+the 10\,K approach:
+\begin{equation}
+\mathrm{PPTD} = \min_{i}\!\left[T_{gas,i} - T_{wf,i}\right] = 10\,\text{K}
+\label{eq:pptd}
+\end{equation}
+This is the maximum heat that the stream can give up to that cycle. Because
+the heater inlet temperature of the working fluid is the floor for the gas
+outlet, a cycle whose heater inlet is hot (a recuperated sCO$_2$ cycle, for
+example) can recover less of the stream than one whose heater inlet is cold.
+The conductance is then accumulated segment by segment,
+\begin{equation}
+UA = \sum_{i} \frac{\Delta Q_i}{\mathrm{LMTD}_i}, \qquad
+\mathrm{LMTD}_i = \frac{\Delta T_{i} - \Delta T_{i+1}}{\ln(\Delta T_{i}/\Delta T_{i+1})}
+\label{eq:seg_UA}
+\end{equation}
+which is exact for counter-flow with piecewise-linear profiles. The two-point
+LMTD result, $UA_{2pt} = Q/\mathrm{LMTD}(\Delta T_{cold},\Delta T_{hot})$, is
+computed alongside for comparison (Section~\ref{sec:rq2_hx_sizing}).
+
+\section{Equipment Sizing and Capital Cost (RQ2)}
+\label{sec:method_rq2}
+
+\subsection{Site Design Points}
+\label{sec:method_sitedesign}
+
+Each Australian site (Table~\ref{tab:casestudies}) is a fixed waste-gas
+stream with source temperature $T_{src}$ and mass flow $\dot{m}_{gas}$. Each
+cycle is integrated with the stream through the heater model of
+Section~\ref{sec:method_pinch}. For the CO$_2$ cycles the pressures follow the
+RQ1 rules. For the steam cycle the boiler pressure is a free design variable:
+the evaporation temperature fixes an internal pinch at the start of boiling,
+so a higher pressure raises cycle efficiency but prevents the gas from being
+cooled as far. The pressure is therefore chosen by a golden-section search to
+maximise the net work per kilogram of waste gas,
+\begin{equation}
+w_{gas} = \eta_{th}\; c_{p,gas}\,\left(T_{src} - T_{gas,out}\right),
+\qquad \dot{W}_{site} = \dot{m}_{gas}\, w_{gas}
+\label{eq:wgas}
+\end{equation}
+with $c_{p,gas} = 1.10$\,kJ/(kg$\cdot$K). Equation~\eqref{eq:wgas} is the
+quantity a plant owner actually receives from a given stream; it rewards
+both conversion efficiency and depth of heat recovery, and it is used
+throughout RQ2--RQ4. The recuperator of each CO$_2$ cycle is discretised in
+the same way as the heater (200 enthalpy steps with real properties on both
+sides) to obtain its $UA$ and to check that no internal temperature crossover
+occurs. The heat-rejection exchanger (condenser or gas cooler) is assigned a
+mean temperature difference of 10\,K to the cooling medium for all three
+cycles.
+
+\subsection{Turbomachinery Compactness}
+
+Turbine size parameter and volumetric flow ratio are calculated from
+Macchi and Astolfi~\cite{Macchi2017}:
+\begin{equation}
+\mathrm{SP} = \frac{\dot{V}_{out}^{0.5}}{\Delta h_{is}^{0.25}}, \qquad
+\mathrm{VFR} = \frac{v_{out}}{v_{in}}
+\label{eq:sp_vfr}
+\end{equation}
+where $\dot{V}_{out}$ is the volumetric flow rate at turbine exhaust (m$^3$/s
+per kg/s of working fluid) and $\Delta h_{is}$ is the isentropic enthalpy
+drop (kJ/kg). A VFR below approximately 5 is taken as the threshold for
+single-stage radial turbine feasibility~\cite{Macchi2017}. Both are evaluated
+at the site design points.
+
+\subsection{Heat Exchanger Area}
+
+For the illustrative comparison of sizing methods, the tCO$_2$ heater area is
+reported as $A = UA/U$ with the overall coefficient computed from the PCHE
+resistance network
+\begin{equation}
+\frac{1}{U} = \frac{1}{h_{CO_2}} + \frac{t_{wall}}{k_{wall}} + \frac{1}{h_{gas}}
+\label{eq:U_overall}
+\end{equation}
+with $h_{CO_2} = 2000$\,W/m$^2$K (supercritical CO$_2$ side, conservative
+PCHE estimate from Dostal~\cite{Dostal2004}), $h_{gas} = 500$\,W/m$^2$K
+(exhaust gas forced convection), $t_{wall} = 2$\,mm, and $k_{wall} =
+15$\,W/mK (SS316), giving $U = 380$\,W/m$^2$K. The comparison is made at
+$\varepsilon = 0$ (pump exit to turbine inlet), which places the
+pseudo-critical $c_p$ peak inside the heater and maximises the divergence
+between the segmented and two-point results. Capital costs are computed from
+$UA$ directly, so the value of $U$ does not affect the economics.
+
+\subsection{Capital Cost Estimation}
+\label{sec:method_cost}
+
+Every cycle is costed with the same method and the same correlations, applied
+component by component to the site design point scaled to the required net
+output (Table~\ref{tab:cost_basis}). CO$_2$ turbines and all heat exchangers
+use the NETL correlations of Weiland, Lance and Pidaparti~\cite{Weiland2019};
+the steam turbine uses a power law fitted to the US~DOE small-turbine
+benchmarks~\cite{DOE2012}; pumps and the sCO$_2$ compressor use Turton et
+al.~\cite{Turton2012}. Turbine cost is evaluated on \emph{shaft} power
+($\dot{W}_{net}/(1-\mathrm{BWR})$), which penalises the high back-work ratio
+of the sCO$_2$ cycle correctly. The condenser or cooler, omitted at the
+interim stage, is included for all three cycles because low-efficiency WHR
+plants reject three to six units of heat per unit of electricity.
+
+\begin{table}[H]
+\centering
+\caption{Capital cost basis. All correlations escalated to 2026 by CEPCI
+(2001: 397; 2012: 584.6; 2017: 567.5; 2026: $\approx$830~\cite{CEPCI2026})
+and converted at 1\,USD = 1.395\,AUD~\cite{RBA2026}; +35\,\% installation on
+all equipment~\cite{Turton2012}.}
+\label{tab:cost_basis}
+\renewcommand{\arraystretch}{1.3}
+\small
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{3.0cm}
+  >{\raggedright\arraybackslash}p{5.2cm}
+  >{\raggedright\arraybackslash}p{2.6cm}
+  >{\raggedright\arraybackslash}X}
+\toprule
+\rowcolor{tableheader}
+\textbf{Component} & \textbf{Correlation (cost year)} & \textbf{Scaling variable} & \textbf{Validity / note} \\
+\midrule
+\rowcolor{rowgray}
+Primary heater, recuperator & $49.45\,UA^{0.7544}\,f_T$ (2017)~\cite{Weiland2019} & $UA$ (W/K) & $1.6\times10^5$--$2.1\times10^8$\,W/K; $f_T=1$ below 550\,\textdegree C \\
+Condenser / cooler & $32.88\,UA^{0.75}$ (2017)~\cite{Weiland2019} & $UA$ (W/K) & 10\,K mean $\Delta T$ assumed \\
+\rowcolor{rowgray}
+CO$_2$ turbine & $406{,}200\,\dot{W}_{sh}^{0.8}$ (2017)~\cite{Weiland2019} & shaft MW & 8--35\,MW; extrapolated below \\
+Steam turbine & $a\,\dot{W}_{sh}^{\,b}$, fitted to USD\,900/kW at 150\,kW and USD\,200/kW at 2\,MW (2012)~\cite{DOE2012} & shaft kW & back-pressure benchmark; condensing units cost more \\
+\rowcolor{rowgray}
+sCO$_2$ compressor & Turton centrifugal compressor (2001)~\cite{Turton2012} & kW & 450--3000\,kW \\
+Feed / CO$_2$ pump & Turton centrifugal pump (2001)~\cite{Turton2012} & kW & 1--300\,kW; no pressure factor \\
+\rowcolor{rowgray}
+Generator & $108{,}900\,\dot{W}_e^{0.5463}$ (2017)~\cite{Weiland2019} & MWe & 4--750\,MWe; extrapolated below \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+The Interim Report used ad hoc power-law coefficients for the turbines and
+approximate terminal temperature differences for the heaters; those were
+replaced because (i)~the coefficients could not be traced to the cited
+source and (ii)~the terminal-difference approximation produced unphysical
+driving forces for the steam boiler and the sCO$_2$ heater. Specific capital
+cost (AUD/kW) is reported at 100\,kW, 500\,kW, 1\,MW and 5\,MW net output at
+each site's design conditions, and the cost breakdown at 1\,MWe.
+
+\section{Techno-Economic Analysis (RQ3)}
+\label{sec:method_rq3}
+
+\subsection{Case Study Definitions}
+
+Three Australian industrial case studies are drawn from ARENA~\cite{ARENA2023}
+and A2EP~\cite{A2EP2022} data (Table~\ref{tab:casestudies}).
+
+\begin{table}[H]
+\centering
+\caption{Australian industrial case study definitions.}
+\label{tab:casestudies}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{1.3cm}
+  >{\raggedright\arraybackslash}p{3.9cm}
+  >{\centering\arraybackslash}p{1.6cm}
+  >{\centering\arraybackslash}p{1.5cm}
+  >{\centering\arraybackslash}p{1.9cm}
+  >{\raggedright\arraybackslash}X}
+\toprule
+\rowcolor{tableheader}
+\textbf{Case} & \textbf{Industry / Site} & \textbf{$T_{src}$ (\textdegree C)} &
+\textbf{$\dot{m}_{gas}$ (kg/s)} & \textbf{Price (AUD/MWh)} & \textbf{Rationale} \\
+\midrule
+\rowcolor{rowgray}
+CS2 & Gas processing intercooler (Pilbara, WA) & 200 & 30 & 130 &
+  Representative LNG train; isolated-grid price premium~\cite{AEMO2024} \\
+CS1 & Cement preheater exhaust (Gladstone, QLD) & 350 & 50 & 90 &
+  Dominant WHR opportunity in Australian cement \\
+\rowcolor{rowgray}
+CS3 & Electric arc furnace flue gas (Sydney, NSW) & 500 & 20 & 100 &
+  High-temperature WHR in NEM-connected steelmaking \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Fixed-Source Basis}
+
+The comparison is made on a \emph{fixed-source} basis: each cycle is sized to
+the net output it can recover from the site's stream
+(Eq.~\ref{eq:wgas}), and its capital cost follows from the cost model at that
+size. This is the decision an operator faces --- the stream is given, the
+plant is not. A fixed-output comparison (all cycles at 1\,MWe) is reported in
+RQ2 for the capital cost; on that basis, because waste heat is free and the
+plant life and capacity factor are common, LCOE is simply proportional to the
+specific capital cost, $\mathrm{LCOE} = (\mathrm{CRF} + 0.025)\,
+\mathrm{TEC}/(8760\,\mathrm{CF})$, and adds no information beyond RQ2.
+
+\subsection{LCOE, NPV, Payback and IRR}
+
+Levelised Cost of Electricity is calculated following Short et
+al.~\cite{Short1995}:
+\begin{equation}
+\mathrm{LCOE} = \frac{C_{cap} \cdot \mathrm{CRF} + C_{OM}}{E_{gen}}
+\label{eq:lcoe}
+\end{equation}
+where $C_{cap}$ is the total erected cost (AUD), $C_{OM}$ is annual
+operations and maintenance (2.5\,\% of capital per year, consistent with WHR
+industry practice~\cite{Baglietto2023}), $E_{gen}$ is annual electricity
+generation (MWh/yr at 85\,\% capacity factor), and CRF is the capital
+recovery factor at a 7\,\% real discount rate over a 20-year project life:
+\begin{equation}
+\mathrm{CRF} = \frac{r(1+r)^n}{(1+r)^n - 1} = 0.0944
+\label{eq:crf}
+\end{equation}
+Net present value is the sum of discounted annual net revenue (electricity
+revenue minus O\&M) over the project life less the initial capital. Payback
+is reported as \emph{discounted} payback --- the year in which cumulative
+discounted net cash flow first exceeds the capital, interpolated within the
+year --- so that it is consistent with NPV and LCOE; the simple payback is
+also recorded. Internal rate of return is the discount rate at which NPV is
+zero. Electricity prices are drawn from AEMO spot market data and WA
+wholesale tariffs~\cite{AEMO2024} (Table~\ref{tab:casestudies}). Waste heat
+is free, no carbon price is applied, and the cost of mechanical chilling for
+the tCO$_2$ condenser is not included (Section~\ref{sec:plow_sensitivity}
+quantifies it separately).
+
+\subsection{Monte Carlo Uncertainty Analysis}
+
+Uncertainty is quantified by 10,000-sample Monte Carlo, varying three
+parameters simultaneously with uniform distributions: capital cost
+($\pm 30$\,\%, matching the stated uncertainty of the cost correlations),
+electricity price ($\pm 40$\,\%) and capacity factor (60--95\,\%). The
+primary output is $P(\mathrm{NPV} > 0)$, with P10/P50/P90 values of NPV and
+LCOE. A breakeven analysis also reports the reduction in heat exchanger cost
+(primary heater plus recuperator) at which each CO$_2$ cycle would match the
+best cycle's LCOE at the same site.
+
+\section{Off-Design Analysis (RQ4)}
+\label{sec:method_rq4}
+
+Part-load performance is evaluated at five load levels --- 100, 80, 60, 40,
+and 20\,\% of design mass flow --- using a simplified Stodola efficiency
+correction:
+\begin{equation}
+\eta_{od} = \eta_0 \cdot [1 - 0.3(1-f)^2]
+\label{eq:stodola}
+\end{equation}
+where $f$ is the part-load mass-flow fraction and the parabolic coefficient
+$0.3$ is calibrated to Yang et al.'s~\cite{Yang2024} tCO$_2$ part-load data.
+The correction is applied to the turbine of every cycle and additionally to
+the sCO$_2$ compressor. Sliding-pressure control is applied: $P_{high} =
+P_{design}\,f$ for the SRC, $P_{high} = 20\,(0.5 + 0.5f)$\,MPa for sCO$_2$
+and $P_{high} = P_{design}\,(0.6 + 0.4f)$ for tCO$_2$, with low-side
+pressures and turbine inlet temperature held at their site design values.
+The heater integration is not re-solved at part load.
+
+Operational flexibility is scored using the Marchionni et
+al.~\cite{Marchionni2020} framework with four criteria: turndown ratio (weight
+0.30), efficiency retention at 60\,\% load (0.30), efficiency retention at
+40\,\% load (0.25), and startup complexity (0.15). Retention values are
+averaged over the three sites. Startup complexity scores are assigned
+qualitatively based on the literature: SRC 0.55 (steam drum pressurisation,
+blow-down, long warm-up required); sCO$_2$ 0.75 (no phase change, faster
+startup, critical control near compressor operating point); tCO$_2$ 0.80
+(simplest startup, liquid pump, no near-critical compressor
+management~\cite{Marchionni2020}).
+
+\section{Implementation and Reproducibility}
+\label{sec:method_code}
+
+All models are implemented in a single Python package (\texttt{co2whr}) with
+one script per research question and a driver (\texttt{run\_all.py}) that
+regenerates every figure and every number in this thesis in under two minutes
+(Appendix~\ref{app:code}). Results are written to a machine-readable file
+(\texttt{results.json}) from which the tables in Chapters~\ref{ch:results_rq1}
+to~\ref{ch:results_rq4} were transcribed.

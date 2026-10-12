@@ -1,0 +1,225 @@
+%% ============================================================
+%% CHAPTER 6 — RQ3: TECHNO-ECONOMICS
+%% ============================================================
+\chapter{Techno-Economic Analysis (RQ3)}
+\label{ch:results_rq3}
+
+This chapter answers RQ3 on the fixed-source basis of
+Section~\ref{sec:method_rq3}: each cycle is sized to the output it can
+recover from the site stream (Table~\ref{tab:sitedesign}), costed at that
+size, and evaluated at the site electricity price.
+Section~\ref{sec:rq3_deterministic} gives the deterministic results,
+Section~\ref{sec:rq3_recovery} examines why the ranking differs from the
+efficiency ranking, Section~\ref{sec:rq3_montecarlo} the Monte Carlo
+robustness and breakeven analysis.
+
+\section{Deterministic LCOE, NPV, Payback and IRR}
+\label{sec:rq3_deterministic}
+
+\begin{figure}[H]
+\centering
+\thesisfig{RQ3_LCOE_NPV_MONTE_CARLO.png}{1.0}{10cm}
+\caption{Techno-economic results on a fixed-source basis (2026 AUD): net
+power recovered from each stream, LCOE against the site electricity price,
+project NPV, and Monte Carlo probability of positive NPV.}
+\label{fig:rq3_results}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\caption{Deterministic techno-economic results on a fixed-source basis
+(7\,\% real discount rate, 20-year life, 85\,\% capacity factor, O\&M 2.5\,\%
+of capital). Payback is discounted.}
+\label{tab:rq3_results}
+\renewcommand{\arraystretch}{1.25}
+\footnotesize
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{0.9cm}>{\raggedright\arraybackslash}p{1.0cm}
+  >{\centering\arraybackslash}X >{\centering\arraybackslash}X >{\centering\arraybackslash}X
+  >{\centering\arraybackslash}X >{\centering\arraybackslash}X >{\centering\arraybackslash}X >{\centering\arraybackslash}X}
+\toprule
+\rowcolor{tableheader}
+\textbf{Site} & \textbf{Cycle} & Output (kW) & TEC (kAUD) & TEC (AUD/kW) & LCOE (AUD/MWh) & NPV (kAUD) & Payback (yr) & IRR (\%) \\
+\midrule
+\rowcolor{rowgray} CS2 & SRC     & 412  & 2{,}457  & 5{,}967  & \textbf{95.7}  & 1{,}115  & 10.6 & 12.4 \\
+                   CS2 & sCO$_2$ & 340  & 5{,}144  & 15{,}146 & 242.9 & $-$3{,}023 & never & $-$2.3 \\
+\rowcolor{rowgray} CS2 & tCO$_2$ & 723  & 4{,}511  & 6{,}238  & 100.0 & \textbf{1{,}710} & 11.4 & 11.6 \\
+\midrule
+                   CS1 & SRC     & 2639 & 5{,}790  & 2{,}194  & \textbf{35.2}  & \textbf{11{,}415} & 4.2 & 27.8 \\
+\rowcolor{rowgray} CS1 & sCO$_2$ & 1988 & 11{,}715 & 5{,}894  & 94.5  & $-$706 & never & 6.2 \\
+                   CS1 & tCO$_2$ & 3418 & 11{,}214 & 3{,}281  & 52.6  & 10{,}083 & 7.3 & 17.2 \\
+\midrule
+\rowcolor{rowgray} CS3 & SRC     & 2273 & 4{,}368  & 1{,}922  & \textbf{30.8}  & \textbf{12{,}406} & 3.2 & 36.2 \\
+                   CS3 & sCO$_2$ & 1280 & 7{,}274  & 5{,}684  & 91.1  & 895 & 16.0 & 8.5 \\
+\rowcolor{rowgray} CS3 & tCO$_2$ & 2186 & 7{,}733  & 3{,}537  & 56.7  & 7{,}467 & 7.0 & 17.9 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{findingbox}
+\textbf{Finding 22 --- The steam cycle gives the lowest cost of electricity at
+every site.}
+LCOE is \keyresult{AUD\,96, 35 and 31/MWh} for steam at CS2, CS1 and CS3,
+against 100, 53 and 57/MWh for tCO$_2$ and 243, 94 and 91/MWh for sCO$_2$.
+At the two hotter sites every cycle except sCO$_2$ generates well below the
+site electricity price; at the 200\,\textdegree C Pilbara site steam and
+tCO$_2$ sit 23--26\,\% below the AUD\,130/MWh price and sCO$_2$ is almost
+twice it. The Interim Report's values of AUD\,13--42/MWh for the best cycles
+were lower because they omitted heat rejection, mis-sized the heaters and
+assumed a 1\,MWe plant regardless of the stream.
+\end{findingbox}
+
+\begin{findingbox}
+\textbf{Finding 23 --- On NPV the tCO$_2$ cycle is the better investment at
+200\,\textdegree C, because it recovers 75\,\% more power from the same
+stream; steam is the better investment at 350 and 500\,\textdegree C.}
+At CS2 the tCO$_2$ project is worth \keyresult{AUD\,1.71\,M against 1.12\,M}
+for steam, despite a 4\,\% higher LCOE, because 723\,kW earns more than
+412\,kW. At CS1 steam leads (11.4\,M against 10.1\,M) even though tCO$_2$
+recovers 29\,\% more power, because its plant costs 94\,\% more; at CS3
+steam leads clearly (12.4\,M against 7.5\,M). The sCO$_2$ project has
+negative NPV at CS2 and CS1 and is marginal at CS3.
+\end{findingbox}
+
+\begin{findingbox}
+\textbf{Finding 24 --- Discounted payback is 3--4 years for steam at the two
+hotter sites and 7 years for tCO$_2$; the 200\,\textdegree C site pays back
+in 10--11 years for either.}
+Steam returns its capital in \keyresult{4.2 and 3.2 years} at CS1 and CS3
+with IRRs of 28 and 36\,\%; tCO$_2$ in 7.3 and 7.0 years at 17--18\,\%. At
+CS2 both are 10.6--11.4 years at 12\,\% IRR, only five points above the
+discount rate. The sCO$_2$ cycle never recovers its capital at CS2 or CS1 and
+takes 16 years at CS3. (Simple payback, reported at the interim stage, is
+2.8--9.4 years for the cases with positive NPV and understates the time to
+recover capital by 1--7 years.)
+\end{findingbox}
+
+\section{Efficiency versus Recovery Depth}
+\label{sec:rq3_recovery}
+
+\begin{table}[H]
+\centering
+\caption{Why the economic ranking differs from the efficiency ranking:
+recovered power is the product of efficiency and the depth of heat recovery.}
+\label{tab:recovery}
+\renewcommand{\arraystretch}{1.25}
+\footnotesize
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{0.9cm}>{\raggedright\arraybackslash}p{1.0cm}
+  >{\centering\arraybackslash}X >{\centering\arraybackslash}X >{\centering\arraybackslash}X
+  >{\centering\arraybackslash}X >{\centering\arraybackslash}X >{\centering\arraybackslash}X}
+\toprule
+\rowcolor{tableheader}
+\textbf{Site} & \textbf{Cycle} & $\eta_{th}$ rank & Gas out (\textdegree C) & Heat recovered (kW) & Output (kW) & LCOE rank & NPV rank \\
+\midrule
+\rowcolor{rowgray} CS2 & SRC     & 2 & 113.6 & 2{,}853  & 412  & 1 & 2 \\
+                   CS2 & sCO$_2$ & 3 & 110.0 & 2{,}970  & 340  & 3 & 3 \\
+\rowcolor{rowgray} CS2 & tCO$_2$ & 1 & 60.2  & 4{,}614  & 723  & 2 & 1 \\
+\midrule
+                   CS1 & SRC     & 2 & 147.2 & 11{,}153 & 2639 & 1 & 1 \\
+\rowcolor{rowgray} CS1 & sCO$_2$ & 3 & 187.5 & 8{,}937  & 1988 & 3 & 3 \\
+                   CS1 & tCO$_2$ & 1 & 101.1 & 13{,}689 & 3418 & 2 & 2 \\
+\midrule
+\rowcolor{rowgray} CS3 & SRC     & 1 & 164.7 & 7{,}376  & 2273 & 1 & 1 \\
+                   CS3 & sCO$_2$ & 3 & 289.1 & 4{,}641  & 1280 & 3 & 3 \\
+\rowcolor{rowgray} CS3 & tCO$_2$ & 2 & 151.1 & 7{,}675  & 2186 & 2 & 2 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{findingbox}
+\textbf{Finding 25 --- In waste heat recovery, depth of recovery matters as
+much as efficiency, and the economics follow their product.}
+At CS1 the sCO$_2$ cycle is only 1.4 efficiency points below steam
+(22.2 against 23.7\,\%) yet produces \keyresult{25\,\% less power}, because
+its recuperated heater inlet of 178\,\textdegree C leaves the gas at
+188\,\textdegree C while steam cools it to 147\,\textdegree C. At CS2 the
+tCO$_2$ cycle is only 1.2 points above steam in efficiency yet produces
+75\,\% more power, because it cools the gas to 60\,\textdegree C against
+114\,\textdegree C. The useful figure of merit for a WHR cycle is the net
+work per kilogram of waste gas (Eq.~\ref{eq:wgas}), and it is on this
+quantity, divided by the cost of the plant that delivers it, that the site
+rankings turn. A fixed-output comparison hides this entirely: at a common
+1\,MWe, LCOE is simply $0.01604 \times$ TEC (AUD/kW) at these economic
+parameters, and would reproduce the capital-cost ordering of
+Finding~19 at every site.
+\end{findingbox}
+
+\section{Monte Carlo Uncertainty and Breakeven Analysis}
+\label{sec:rq3_montecarlo}
+
+\begin{table}[H]
+\centering
+\caption{Monte Carlo results (10,000 samples; capital $\pm 30$\,\%, price
+$\pm 40$\,\%, capacity factor 60--95\,\%) and the reduction in heat exchanger
+cost (heater plus recuperator) at which a cycle would match the best LCOE at
+its site.}
+\label{tab:montecarlo}
+\renewcommand{\arraystretch}{1.25}
+\setlength{\tabcolsep}{3.5pt}
+\scriptsize
+\begin{tabular}{@{}l l r l l r l@{}}
+\toprule
+\rowcolor{tableheader}
+\textbf{Site} & \textbf{Cycle} & $P(\mathrm{NPV}>0)$ & NPV P10 / P50 / P90 & LCOE P10 / P50 / P90 & Determ.\ NPV & HX cost cut to \\
+\rowcolor{tableheader}
+ & & (\%) & (kAUD) & (AUD/MWh) & (kAUD) & match best \\
+\midrule
+\rowcolor{rowgray} CS2 & SRC     & 72.2  & $-$723 / 691 / 2{,}386 & 77 / 104 / 140 & 1{,}115 & --- (best) \\
+                   CS2 & sCO$_2$ & 0.5   & $-$5{,}191 / $-$3{,}310 / $-$1{,}423 & 194 / 265 / 355 & $-$3{,}023 & unreachable \\
+\rowcolor{rowgray} CS2 & tCO$_2$ & 67.7  & $-$1{,}541 / 966 / 3{,}957 & 80 / 109 / 146 & 1{,}710 & 11\,\% \\
+\midrule
+                   CS1 & SRC     & 99.8  & 3{,}800 / 9{,}488 / 16{,}555 & 28 / 38 / 51 & 11{,}415 & --- (best) \\
+\rowcolor{rowgray} CS1 & sCO$_2$ & 32.9  & $-$7{,}480 / $-$2{,}028 / 3{,}987 & 76 / 103 / 138 & $-$706 & unreachable \\
+                   CS1 & tCO$_2$ & 89.7  & $-$81 / 7{,}623 / 17{,}108 & 42 / 57 / 77 & 10{,}083 & 95\,\% \\
+\midrule
+\rowcolor{rowgray} CS3 & SRC     & 100.0 & 5{,}208 / 10{,}568 / 17{,}247 & 25 / 34 / 45 & 12{,}406 & --- (best) \\
+                   CS3 & sCO$_2$ & 48.8  & $-$3{,}745 / $-$87 / 4{,}079 & 73 / 99 / 133 & 895 & unreachable \\
+\rowcolor{rowgray} CS3 & tCO$_2$ & 91.3  & 261 / 5{,}699 / 12{,}434 & 45 / 62 / 83 & 7{,}467 & unreachable \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The Monte Carlo medians lie below the deterministic values because the
+capacity-factor distribution is centred on 77.5\,\% rather than the 85\,\%
+baseline; the P10--P90 spread is dominated by the $\pm 40$\,\% price range.
+
+\begin{findingbox}
+\textbf{Finding 26 --- Steam at 350 and 500\,\textdegree C is robust to every
+combination of cost overrun, price fall and reduced running hours; tCO$_2$
+at those sites is robust in nine cases out of ten; the 200\,\textdegree C
+site is a one-in-three risk for either.}
+$P(\mathrm{NPV}>0)$ is \keyresult{99.8 and 100\,\%} for steam at CS1 and CS3
+(P10 NPV +AUD\,3.8\,M and +5.2\,M), 89.7 and 91.3\,\% for tCO$_2$, and 72.2
+and 67.7\,\% for steam and tCO$_2$ at CS2. The sCO$_2$ cycle is unviable in
+practice: 0.5\,\% at CS2, 33\,\% at CS1 and 49\,\% at CS3, with negative
+median NPV at all three.
+\end{findingbox}
+
+\begin{findingbox}
+\textbf{Finding 27 --- Cheaper heat exchangers would make tCO$_2$ competitive
+with steam only at the 200\,\textdegree C site, and would not rescue sCO$_2$
+anywhere.}
+A \keyresult{11\,\% reduction} in the cost of the tCO$_2$ heater and
+recuperator would bring its LCOE level with steam at CS2, where its recovery
+advantage is largest; at CS1 a 95\,\% reduction would be needed, and at CS3
+even free heat exchangers would leave it above steam, because the remaining
+turbomachinery and heat-rejection costs are themselves above the whole steam
+plant. For sCO$_2$ the target is not reachable at any site. The competitive
+window for CO$_2$ cycles in Australian WHR is therefore the low-temperature,
+deep-recovery case, and it depends on a cold heat sink (Finding~12).
+\end{findingbox}
+
+\section{Summary of RQ3 Results}
+\label{sec:rq3_summary}
+
+Sized to what each cycle can actually recover from the site stream and
+costed on a consistent basis, the steam Rankine cycle gives the lowest cost
+of electricity at all three sites and the highest NPV at the two sites above
+300\,\textdegree C, with discounted paybacks of 3--4 years and IRRs of
+28--36\,\%. The transcritical CO$_2$ cycle is the better investment at the
+200\,\textdegree C Pilbara site, where its deep heat recovery earns it 53\,\%
+more NPV than steam, but only if a 14\,\textdegree C heat sink can be
+provided at no cost, which Finding~12 shows it cannot. The supercritical
+CO$_2$ cycle is not viable at any of the three sites under 2026 conditions.
+The central lesson is that the right figure of merit for a WHR cycle is the
+work recovered per kilogram of waste gas, and its cost; thermal efficiency
+alone predicts neither.
